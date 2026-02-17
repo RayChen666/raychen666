@@ -52,7 +52,7 @@ export default async function RootLayout({
               (function() {
                 try {
                   const root = document.documentElement;
-                  const defaultTheme = 'dark';
+                  const defaultTheme = 'system';
                   
                   // Set defaults from config
                   const config = ${JSON.stringify({
