@@ -142,7 +142,11 @@ export default function About() {
                 />
               </Row>
             )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
+            <Heading 
+              className={styles.textAlign} 
+              variant="display-strong-xl"
+              style={{ fontFamily: "'Zeyada', cursive" }}
+            >
               {person.name}
             </Heading>
             <Text
@@ -204,7 +208,12 @@ export default function About() {
 
           {about.work.display && (
             <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
+              <Heading as="h2" 
+              id={about.work.title} 
+              variant="display-strong-s" 
+              marginBottom="m"
+              style={{ fontFamily: "'Cinzel Decorative', serif" }}
+            >
                 {about.work.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
@@ -263,7 +272,12 @@ export default function About() {
 
           {about.studies.display && (
             <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
+              <Heading as="h2" 
+              id={about.studies.title} 
+              variant="display-strong-s" 
+              marginBottom="m"
+              style={{ fontFamily: "'Cinzel Decorative', serif" }}
+            >
                 {about.studies.title}
               </Heading>
               <Column fillWidth gap="l" marginBottom="40">
@@ -287,7 +301,8 @@ export default function About() {
                 as="h2"
                 id={about.technical.title}
                 variant="display-strong-s"
-                marginBottom="40"
+                marginBottom="m"
+                style={{ fontFamily: "'Cinzel Decorative', serif" }}
               >
                 {about.technical.title}
               </Heading>

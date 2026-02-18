@@ -59,7 +59,11 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ structure, about }) =
               onClick={() => scrollTo(section.title, 80)}
             >
               <Flex height="1" minWidth="16" background="neutral-strong"></Flex>
-              <Text>{section.title}</Text>
+              <Text style={{ fontFamily: "'Cinzel Decorative', serif" }}>
+                
+                {section.title}
+
+              </Text>
             </Flex>
             {about.tableOfContent.subItems && (
               <>

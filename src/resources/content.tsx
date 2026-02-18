@@ -118,8 +118,8 @@ const about: About = {
     title: "Work Experience",
     experiences: [
       {
-        company: "NYU Future Reality Lab (New York City, NY)",
-        timeframe: "April 2025 - Present",
+        company: "NYU Future Reality Lab",
+        timeframe: "April 2025 - Present (New York City, NY)",
         role: "Research Assistant (On-Site)",
         achievements: [
           <>
@@ -153,8 +153,8 @@ const about: About = {
         ],
       },
       {
-        company: "Spatial Front, Inc (Washington, D.C.)",
-        timeframe: "July 2023 – August 2023",
+        company: "Spatial Front, Inc",
+        timeframe: "July 2023 – August 2023 (Washington, D.C.)",
         role: "Data Engineer Intern in Quality Assurance (Remote)",
         achievements: [
           <>
@@ -171,8 +171,8 @@ const about: About = {
         images: [],
       },
       {
-        company: "7thOnline, Inc (New York City, NY)",
-        timeframe: "June 2022 – August 2022",
+        company: "7thOnline, Inc",
+        timeframe: "June 2022 – August 2022 (New York City, NY)",
         role: "Software Engineer Intern (On-Site)",
         achievements: [
           <>
@@ -247,7 +247,7 @@ const about: About = {
         ],
       },
       {
-        title: "Research Software",
+        title: "Research",
         description: (
           <>Begin learnning for composing research paper.</>
         ),
