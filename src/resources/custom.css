@@ -6,6 +6,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap');
+article h2 {
+  font-family: 'Cinzel Decorative', serif !important;
+}
 /* :root {
   /*
   /* Override default variables here */

@@ -1,44 +1,89 @@
 ---
-title: "Automating Design Handovers with a Figma to Code Pipeline"
-publishedAt: "2024-04-01"
-summary: "Explore the enduring debate between using spaces and tabs for code indentation, and why this choice matters more than you might think."
+title: "
+HandGestureDJITello - Using Hand Gestures to Control Drone "
+publishedAt: "2024-05-13"
+summary: "Employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
+storing hand gesture point history. Used MediaPipe for hand landmark extraction and OpenCV for webcam 
+hand capture and control panel design (compiled work posted on Github)."
 images:
-  - "/images/projects/project-01/cover-02.jpg"
-  - "/images/projects/project-01/image-03.jpg"
+  - "/images/projects/HandGestureDJITello/Project-Demo-Video.mp4"
+  - "/images/projects/HandGestureDJITello/project intro 1.jpg"
+  - "/images/projects/HandGestureDJITello/Pipeline 3.jpg"
+  
+  
 team:
-  - name: "John Doe"
+  - name: "Ray Chen"
+    avatar: "/images/self.jpg"
     role: "Software Engineer"
-    avatar: "/images/avatar.jpg"
-    linkedIn: "https://www.linkedin.com/company/once-ui/"
-link: "https://once-ui.com/"
+    linkedIn: "https://www.linkedin.com/in/raychen666666/"
+link: "https://github.com/RayChen666/HandGestureDJITello"
 ---
 
 ## Overview
 
-In this project, I focused on automating the often tedious design handover process. The goal was to create a pipeline that converts Figma designs directly into clean, production-ready code. By integrating design tokens, component libraries, and automated workflows, this solution significantly reduced the time spent on translating design assets into code, while maintaining design consistency across the product.
+In this project, I employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
+storing hand gesture point history. Also, I used MediaPipe for hand landmark extraction and OpenCV for webcam 
+hand capture and control panel design.
 
-## Key Features
 
-- **Figma Plugin Integration**: Developed a custom Figma plugin that extracts design tokens such as colors, typography, and spacing values, and exports them in a format compatible with our codebase.
-- **Code Generation**: Integrated an automated process that translates Figma components into React code using a combination of design tokens and pre-built component templates. This allowed developers to focus more on logic and less on repetitive UI coding.
-- **Continuous Sync**: Established a CI/CD pipeline that continuously synchronizes design changes from Figma to the codebase, ensuring design updates are reflected instantly without manual intervention.
-- **Scalable Design System**: Leveraged a design system that remains the single source of truth for both designers and developers, making it easy to maintain consistency even as the product evolves.
+## Problem Addressing
 
-## Technologies Used
+In today’s world, human-computer interaction is largely confined to traditional screens, limiting the potential 
+for immersive and intuitive experiences. This project aims to break these constraints by exploring the realm of 
+Mixed Reality, which seamlessly blends the digital and physical worlds. By developing an app demo that allows users 
+to control drones using hand gestures, we are taking a significant step towards a future where human-computer interaction 
+becomes more natural and effortless. This innovative approach not only releases people from the limitations of traditional 
+screens but also opens up a wide range of possibilities for enhanced user experiences across various domains.
 
-- **Figma API**: For extracting design tokens and component data directly from the Figma designs.
-- **React and Next.js**: For building the front-end codebase with clean, reusable components.
-- **Styled-Components**: For managing styles dynamically using design tokens.
-- **GitHub Actions**: For automating the pipeline and syncing design changes to the repository.
+## Relevant Python libraries
+- **OpenCV**: Real-time video analysis, enabling tasks like motion detection, object tracking;
+              Image processing operations such as filtering, color space conversions, etc;
+              Detect and describe features in images, such as corners, edges, and key points.
+- **Mediapipe**: Cross-platform including Android, iOS, web, and desktop environments;
+                 Various modalities, such as vision, audio, and sensor data for pipelines;
+                 Pre-built and ready-to-use solutions such as face detection, hand tracking.
+- **Tensorflow**: Machine learning in numerical data processing; 
+- **Djitellopy**: Python library that provides a interface for controlling DJI Tello drones;
+                  Functions include, Drone Control, Speed and Distance Control, Video Streaming.
 
-## Challenges and Learnings
 
-One of the biggest challenges was ensuring that the generated code was clean and maintainable. This involved setting up intelligent mapping between Figma components and React code structures, as well as managing edge cases like responsive design and conditional rendering. Additionally, the continuous synchronization required a robust error-handling system to prevent conflicts during development.
+## Evaluation
 
-## Outcome
+To evaluate the performance of the hand gesture recognition model, I developed the demo application 
+that integrates the model. The demo application captures video frames from a camera and processes them 
+using the MediaPipe hand detection module to extract hand landmarks. These landmarks are then fed into 
+the KeyPointClassifier and PointHistoryClassifier models for gesture classification.
 
-The automated Figma to code pipeline has streamlined the handoff process, cutting down design-to-development time by 40%. Designers now have more confidence that their designs will be accurately translated into code, and developers can focus on more complex logic and feature development. This project has proven the value of automation in bridging the gap between design and development.
+The evaluation of the KeyPointClassifier model involved data preparation, model training, and model evaluation. 
+A dataset of hand gestures was collected, consisting of various hand poses such as open hand, closed hand, pointing 
+gestures, and OK sign. The hand landmarks were extracted using the MediaPipe hand detection module. The PointHistoryClassifier 
+model is designed to classify finger gestures based on a sequence of point histories. The evaluation of the PointHistoryClassifier 
+model followed a similar process as the KeyPointClassifier model. A dataset of finger gestures was collected, consisting of various 
+finger movements such as swiping, tapping, and drawing patterns. The point histories were recorded using the MediaPipe hand tracking 
+module.
+
+To assess the real-time performance of the system, I measured the frame rate and latency of the demo application. The application 
+achieved an average frame rate of 30 frames per second (FPS) on a standard desktop computer, indicating smooth and responsive gesture 
+recognition. The latency between the performed gesture and its corresponding action on the drone was minimal, allowing for intuitive and 
+precise control.
+
+## Implementation
+
+The demo application follows a modular architecture, separating the hand detection, gesture classification, and drone control functionalities 
+into separate modules. The HandDetectionModule.py is responsible for detecting hands in 
+the video frames and extracting the hand landmarks using the MediaPipe hand detection model. The extracted landmarks are then passed to the 
+HandLandmarkModule.py, which applies the KeyPointClassifier and PointHistoryClassifier models to classify the hand gestures and finger movements.
+
+The classified gestures are mapped to specific drone control commands in the DroneControlModule.py. This module establishes a connection with the 
+drone using the DJITelloPy library and sends the appropriate control commands based on the recognized gestures. I also designed the control interface 
+using OpenCV. The layout of the interface mimics the DJITello control application on app store. Left 
+control stick contains up, down, turn left and turn right, while right control stick contains forward, backward, left and right. When the webcam detect ”OK” 
+sign, there will be a yellow ”Camera” label appears under the batter level indicator, and Tello camera will capture image and store in ”Tello Photo” folder.
+
+The main script orchestrates the overall flow of the application, handling webcam connection test, drone connection test, and drone control in a loop. When 
+running the main.py, the webcam will open for test, after testing the functionality of the webcam, by pressing ”c” on keyboard, we can close the camera test 
+without quitting the program. After that by pressing ”d”, the program will call the DroneConnectionTest.py to run the drone connection test. If the drone connection 
+is not successful, the drone control panel will not be opened. If the drone connection succeed, we will enter the control panel. By pressing ”q”, the program will 
+quit immediately.
 
 ---
-
-This project demonstrates your ability to leverage automation and streamline workflows, which is highly relevant for design engineering portfolios focused on efficiency and innovation.

@@ -210,7 +210,7 @@ export default function About() {
             <>
               <Heading as="h2" 
               id={about.work.title} 
-              variant="display-strong-s" 
+              variant="display-strong-xs" 
               marginBottom="m"
               style={{ fontFamily: "'Cinzel Decorative', serif" }}
             >
@@ -274,7 +274,7 @@ export default function About() {
             <>
               <Heading as="h2" 
               id={about.studies.title} 
-              variant="display-strong-s" 
+              variant="display-strong-xs" 
               marginBottom="m"
               style={{ fontFamily: "'Cinzel Decorative', serif" }}
             >
@@ -300,7 +300,7 @@ export default function About() {
               <Heading
                 as="h2"
                 id={about.technical.title}
-                variant="display-strong-s"
+                variant="display-strong-xs"
                 marginBottom="m"
                 style={{ fontFamily: "'Cinzel Decorative', serif" }}
               >
