@@ -30,7 +30,7 @@ export default function Work() {
       />
       <Heading 
         marginBottom="l" 
-        variant="heading-strong-xl" 
+        variant="display-default-m" 
         align="center"
         style={{ fontFamily: "'Cinzel Decorative', serif" }}
       >

@@ -33,7 +33,8 @@ const display: DisplayConfig = {
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
 const protectedRoutes: ProtectedRoutesConfig = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": false,
+  "/work/hand-gesture-dji-tello": false,
+  "/work/ar-tello-simulator": false,
 };
 
 // Import and set font for each variant
