@@ -121,8 +121,8 @@ const effects: EffectsConfig = {
     display: true,
     opacity: 90,
     size: "2",
-    //color: "brand-background-strong",
-    color: "accent-background-strong",
+    color: "brand-background-strong",
+    // color: "accent-background-strong",
   },
   grid: {
     display: false,
