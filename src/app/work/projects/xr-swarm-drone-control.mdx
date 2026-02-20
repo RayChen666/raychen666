@@ -5,17 +5,17 @@ summary: "Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to d
 6-channel WebSocket (including odometry, mpl path, final goal, etc) connecting to ROS2 backend for various sensor 
 control of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference)."
 images:
-  - "/images/projects/project-01/xr-swarm-drone-control-cover-image.jpg"
-  - "/images/projects/project-01/xr-swarm-drone-control-pipeline.jpg"
-  - "/images/projects/project-01/xr-swarm-drone-control-results-1.jpg"
-  - "/images/projects/project-01/xr-swarm-drone-control-results-2.jpg"
+  - "/images/projects/project-01/xrSwarmDroneControl-cover-image.jpg"
+  - "/images/projects/project-01/xrSwarmDroneControl-Pipeline.jpg"
+  - "/images/projects/project-01/xrSwarmDroneControl-results-1.jpg"
+  - "/images/projects/project-01/xrSwarmDroneControl-results-2.jpg"
 link: "https://github.com/RayChen666/XR-Swarm-Drone-Control"
 ---
 
 ## Demo Video
 
 <video controls width="100%" style={{ borderRadius: '8px', marginBottom: '2rem' }}>
-  <source src="/images/projects/project-01/xr-swarm-drone-control-Demo-Video.mp4" type="video/mp4" />
+  <source src="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4" type="video/mp4" />
   Your browser does not support the video tag.
 </video>
 
@@ -68,7 +68,7 @@ middleware are both visualized in figure and summarized in
 table below.
 
 <figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
-   <img src="/images/projects/project-01/xr-swarm-drone-control-pipeline.jpg" 
+   <img src="/images/projects/project-01/xrSwarmDroneControl-pipeline.jpg" 
     alt="Control panel layout" 
     width="100%"
   />
@@ -106,17 +106,17 @@ table below.
 
 ## Reault
 The real drone used in the experiments is a quadrotor with a
-total weight of 1.508 kg and thrust-to-weight ratio of 4 : 1. The
+total weight of 1.508kg and thrust-to-weight ratio of 4:1. The
 platform is equipped with a PixRacer Pro flight controller and
 an NVIDIA Jetson Orin as the central processing unit, running
-Ubuntu 22.04 and ROS 2. For the perception side, the drone 
+Ubuntu 22.04 and ROS2. For the perception side, the drone 
 leverages an Intel Realsense D455 stereo camera for localization
 using a customized version of OpenVINS, which estimates
-the robot state at 100 Hz. A neural depth package is adopted
+the robot state at 100Hz. A neural depth package is adopted
 for mapping purposes, providing a clear depth image as input to the
 NvBlox-based mapping package from which a point cloud is generated. 
-The line of sight of the robot perception is set at 3 m
-with a voxel resolution of 20 cm. The team is composed of two
+The line of sight of the robot perception is set at 3m
+with a voxel resolution of 20cm. The team is composed of two
 additional simulated robots, with their dynamics computed onboard
 the real quadrotor. For the VR interface, we employ the Meta Quest
 2 headset running Meta Horizon OS, a public-level headset suitable
@@ -124,11 +124,11 @@ for research prototyping.
 
 The VR environment is rendered with layered feedback: drones
 as 3D models, ground plane, planned trajectories as 3D strokes,
-and obstacles as a voxel map reconstructed online from occupied-
-space samples. These samples are then rendered in three.js using InstancedMesh, 
+and obstacles as a voxel map reconstructed online from occupied-space 
+samples. These samples are then rendered in three.js using InstancedMesh, 
 a technique that draws thousands of identical
-objects (here cubes) in a single GPU call, enabling smooth real-
-time updates. Voxel colors encode height with a red–green–purple
+objects (here cubes) in a single GPU call, enabling smooth real-time 
+updates. Voxel colors encode height with a red–green–purple
 gradient from low to high, helping users to quickly interpret the
 environment.
 
@@ -137,12 +137,12 @@ framework that runs in the browser, transmitting only the visual
 cues required for headset rendering. To minimize the latency with
 the server, we adopt a Netgear NightHawk V2 as a router, providing
 a minimal latency between the robot, the VR server and the headset,
-with a measured ping of only 5 − 8 ms. Communication relies on
-both ROS 2 topics using the FastRTPS middleware and custom
+with a measured ping of only 5−8ms. Communication relies on
+both ROS2 topics using the FastRTPS middleware and custom
 WebSocket messages.
 
 The flying experiments are conducted in an indoor flying arena
-with a total area of approximately 60 m2. The operator performs VR
+with a total area of approximately 60m<sup>2</sup>. The operator performs VR
 control in a separate sub-area of the same space, ensuring real-time
 interaction with the robot team while maintaining a safe separation
 from the real quadrotor.
