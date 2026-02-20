@@ -35,12 +35,14 @@ of Reality Technology and opens new possibilities for human creativity and expre
 
 ## Limitations of current layout systems
 
-- **Relatively poor spatial reference handling**: current systems struggle in basic user-related commands 
+- **Relatively poor spatial reference handling:** current systems struggle in basic user-related commands 
 like “place the table next to me”, often misinterpreting directional references and user-relative positioning.
-- **Lack of real-time spatial adaptation**: when users make adjustments in the VR environments, existing 
+
+- **Lack of real-time spatial adaptation:** when users make adjustments in the VR environments, existing 
 systems cannot dynamically adjust object placement relative to the user's new position, breaking immersion 
 and spatial coherence.
-- **Limited Multi-scale spatial reasoning**: existing systems cannot handle both scene & room scale spatial 
+
+- **Limited Multi-scale spatial reasoning:** existing systems cannot handle both scene & room scale spatial 
 planning and object-scale positioning in a seemingless workflow.
 
 ## Emerging Importance of Spatial Understanding
@@ -48,15 +50,19 @@ planning and object-scale positioning in a seemingless workflow.
 - Spatial understanding systems with user view & language input can power up robots to do arrangements in the physical 
 world. For example, with multiple housekeeping robots, one prompt from the user (eg., “make the layout of the current 
 room looks more spatial”) will let robots clean the room on their own. 
+
 - Also, specific prompts like (“place the table here”, “give the coffee cup to me”, etc) will enable robots to do tasks for 
 people with disabilities, making their lives easier.
+
 - A spatial understanding system can be a better option for AI to collaborate with people in fulfilling real-world tasks like 
 rescues and surgeries. 
 
 ## Potential Research Questions
 
 - Can multi-agent collaboration produce better spatial layouts than single-agent systems?
+
 - How do specialized agents (parsing, asset, scene, validation) work together to reach coherent arrangement?
+
 - Can agents understand vague prompts from natural language? (eg., “place the table here", 
 “make the room layout cozy and more spatial”)
 
@@ -74,43 +80,66 @@ This is an AI-powered backend that translates natural language commands into pre
 of manual object placement, users can speak commands like "arrange four chairs around the conference table" and the system executes them automatically.
 
 **Language Agent (Natural Language Parser)**
+
 - Parses natural language input into structured <code style={{color: '#aaa'}}>JSON</code> data.
+
 - Extracts command type, target objects, and spatial relationships.
+
 - Routes requests to appropriate downstream agents based on complexity.
+
 - Output Example: "move table left" → `{command_type: "POS/ROTATE", objects: ["table"], spatial_concept: "left relative to user"}`
 
 **Asset Agent (3D Object Management)**
+
 - Queries 3D asset databases using tool calls.
+
 - Instantiates new objects with unique identifiers.
+
 - Manages object metadata (dimensions, categories, properties).
+
 - User case: For "add three chairs," creates three unique chair instances `{chair_01, chair_02, chair_03}` with associated metadata.
 
 **Scene Agent (Spatial Reasoning Engine)**
+
 - Calculate 3D coordinates (x, y, z) and rotation angles.
+
 - Interpret spatial relationships contextually (e.g., "next to" = 0.5m offset).
+
 - Consider user viewpoint and existing scene state.
+
 - Handle complex arrangements (clustering, alignment, functional grouping).
 
 **Verification Agent (Quality Assurance)**
+
 - Performs geometric collision checking between objects.
+
 - Validates scene boundaries and physical plausibility.
+
 - Provides structured feedback to Scene Agent for iterative refinement.
+
 - Feedback Loop: If verification fails, returns diagnostic information to Scene Agent 
-for recalculation (supports up to N iterations, here we set to 3 for time consideration).
+for recalculation (supports up to N iterations, we set to 3 for time consideration).
 
 **Code Agent (Execution Layer)**
+
 - Commits validated transformations to scene database.
+
 - Broadcasts changes via WebSocket to connected VR clients.
 
 ## Tech Stack
-- **Agent Orchestration**: LangGraph for agent coordination and state management.
-- **Spatial Reasoning**: `gemini-2.5-flash-lite`, `gemini-3-pro-preview`, `gemini-2.5-flash-image` with structured <code style={{color: '#aaa'}}>JSON</code> 
+- **Agent Orchestration:** LangGraph for agent coordination and state management.
+
+- **Spatial Reasoning:** `gemini-2.5-flash-lite`, `gemini-3-pro-preview`, `gemini-2.5-flash-image` with structured <code style={{color: '#aaa'}}>JSON</code> 
 output (each model with specialized prompt engineering used for different agents to fulfill their functions).
-- **Communication**: FastAPI backend + WebSocket for real-time VR synchronization.
-- **Web Frontend**: WebXR with Three.js and Meta Immersive Web SDK for 3D rendering.
-- **Databse**: Customized designed Python database to extract `matadata.json` information of various assets.
+
+- **Communication:** FastAPI backend + WebSocket for real-time VR synchronization.
+
+- **Web Frontend:** WebXR with Three.js and Meta Immersive Web SDK for 3D rendering.
+
+- **Databse:** Customized designed Python database to extract `matadata.json` information of various assets.
 
 ## User Study Design
+
 User study design is in progress, with planned evaluation focusing on task completion time, spatial accuracy, 
 and user satisfaction metrics, will be divided into Qualitative and Quantitative measurement tests. A group of 
 15-25 people will be involved.

@@ -59,12 +59,17 @@ ensures any new client immediately receives the current scene state — no manua
 
 ## Technologies Used
 
-- **XR Rendering**: Three.js, WebXR Device API, OpenXR (Meta SDK), troika-three-text.
-- **Input**: WebXR controller tracking, gamepad-wrapper.
-- **Frontend**: ES Modules, Webpack 5, HTTPS Dev Server.
-- **Backend**: Node.js, Express.js, WebSocket, Socket.IO.
-- **Drone Communication**: DJI Tello SDK v2, UDP (command + telemetry channels).
-- **Hardware**: DJI Tello, Meta Quest 3, external WiFi Adapter that enables private network connection between 
+- **XR Rendering:** Three.js, WebXR Device API, OpenXR (Meta SDK), troika-three-text.
+
+- **Input:** WebXR controller tracking, gamepad-wrapper.
+
+- **Frontend:** ES Modules, Webpack 5, HTTPS Dev Server.
+
+- **Backend:** Node.js, Express.js, WebSocket, Socket.IO.
+
+- **Drone Communication:** DJI Tello SDK v2, UDP (command + telemetry channels).
+
+- **Hardware:** DJI Tello, Meta Quest 3, external WiFi Adapter that enables private network connection between 
 localhost server and drone.
 
 ## Challenges
@@ -82,13 +87,16 @@ backend — keeping hardware access and development workflow both functional.
 
 ## User Interface Design
 
-- **Zero-Occlusion Control Panel Design**: all widgets live in the user's lower and higher peripheral 
+- **Zero-Occlusion Control Panel Design:** all widgets live in the user's lower and higher peripheral 
 field so they never block the view of the drone in flight, leaving a fully clear view during observation.
-- **Inactive State**: A subtle background and instructional text guide the user. Two glowing purple rings float at 
+
+- **Inactive State:** A subtle background and instructional text guide the user. Two glowing purple rings float at 
 roughly shoulder height — one on the left, one on the right. All flight controls are hidden.
-- **Active State**: When both hands are inside the rings simultaneously, they turn yellow, the instruction text 
+
+- **Active State:** When both hands are inside the rings simultaneously, they turn yellow, the instruction text 
 hides, and the full control layout appears. The drone connection is initiated automatically.
-- **Button Placement**: Activation rings sit at eye/shoulder height for a natural raised-arm gesture. Control 
+
+- **Button Placement:** Activation rings sit at eye/shoulder height for a natural raised-arm gesture. Control 
 panels are lower — a relaxed elbow position during active flight. LAND and TAKEOFF are placed to the sides, angled 
 to face the user naturally.
 
