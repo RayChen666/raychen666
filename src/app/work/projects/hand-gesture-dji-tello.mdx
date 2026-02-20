@@ -51,29 +51,31 @@ screens but also opens up a wide range of possibilities for enhanced user experi
 To evaluate the performance of the hand gesture recognition model, I developed the demo application 
 that integrates the model. The demo application captures video frames from a camera and processes them 
 using the MediaPipe hand detection module to extract hand landmarks. These landmarks are then fed into 
-the KeyPointClassifier and PointHistoryClassifier models for gesture classification.
+the <code style={{color: '#aaa'}}>KeyPointClassifier</code> and <code style={{color: '#aaa'}}>PointHistoryClassifier</code> 
+models for gesture classification.
 
-The evaluation of the KeyPointClassifier model involved data preparation, model training, and model evaluation. 
+The evaluation of the <code style={{color: '#aaa'}}>KeyPointClassifier</code> model involved data preparation, model training, and model evaluation. 
 A dataset of hand gestures was collected, consisting of various hand poses such as open hand, closed hand, pointing 
-gestures, and OK sign. The hand landmarks were extracted using the MediaPipe hand detection module. The PointHistoryClassifier 
-model is designed to classify finger gestures based on a sequence of point histories. The evaluation of the PointHistoryClassifier 
-model followed a similar process as the KeyPointClassifier model. A dataset of finger gestures was collected, consisting of various 
-finger movements such as swiping, tapping, and drawing patterns. The point histories were recorded using the MediaPipe hand tracking 
-module.
+gestures, and OK sign. The hand landmarks were extracted using the MediaPipe hand detection module. 
+The <code style={{color: '#aaa'}}>PointHistoryClassifier</code> model is designed to classify finger gestures based on a sequence of point histories. 
+The evaluation of the <code style={{color: '#aaa'}}>PointHistoryClassifier</code> model followed a similar process as 
+the <code style={{color: '#aaa'}}>KeyPointClassifier</code> model. A dataset of finger gestures was collected, consisting of various finger movements 
+such as swiping, tapping, and drawing patterns. The point histories were recorded using the MediaPipe hand tracking module.
 
 To assess the real-time performance of the system, I measured the frame rate and latency of the demo application. The application 
-achieved an average frame rate of 30 frames per second (FPS) on a standard desktop computer, indicating smooth and responsive gesture 
+achieved an average frame rate of 30FPS on a standard desktop computer, indicating smooth and responsive gesture 
 recognition. The latency between the performed gesture and its corresponding action on the drone was minimal, allowing for intuitive and 
 precise control.
 
 ## Implementation
 
 The demo application follows a modular architecture, separating the hand detection, gesture classification, and drone control functionalities 
-into separate modules. The HandDetectionModule.py is responsible for detecting hands in 
+into separate modules. The <code style={{color: '#888'}}>HandDetectionModule.py</code> is responsible for detecting hands in 
 the video frames and extracting the hand landmarks using the MediaPipe hand detection model. The extracted landmarks are then passed to the 
-HandLandmarkModule.py, which applies the KeyPointClassifier and PointHistoryClassifier models to classify the hand gestures and finger movements.
+HandLandmarkModule.py, which applies the <code style={{color: '#aaa'}}>KeyPointClassifier</code> and <code style={{color: '#aaa'}}>PointHistoryClassifier</code> 
+models to classify the hand gestures and finger movements.
 
-The classified gestures are mapped to specific drone control commands in the DroneControlModule.py. This module establishes a connection with the 
+The classified gestures are mapped to specific drone control commands in the <code style={{color: '#aaa'}}>DroneControlModule.py</code>. This module establishes a connection with the 
 drone using the DJITelloPy library and sends the appropriate control commands based on the recognized gestures. I also designed the control interface 
 using OpenCV. The layout of the interface mimics the DJITello control application on app store. Left 
 control stick contains up, down, turn left and turn right, while right control stick contains forward, backward, left and right. When the webcam detect ”OK” 
@@ -81,7 +83,7 @@ sign, there will be a yellow ”Camera” label appears under the batter level i
 
 The main script orchestrates the overall flow of the application, handling webcam connection test, drone connection test, and drone control in a loop. When 
 running the main.py, the webcam will open for test, after testing the functionality of the webcam, by pressing ”c” on keyboard, we can close the camera test 
-without quitting the program. After that by pressing ”d”, the program will call the DroneConnectionTest.py to run the drone connection test. If the drone connection 
+without quitting the program. After that by pressing ”d”, the program will call the <code style={{color: '#888'}}>DroneConnectionTest.py</code> to run the drone connection test. If the drone connection 
 is not successful, the drone control panel will not be opened. If the drone connection succeed, we will enter the control panel. By pressing ”q”, the program will 
 quit immediately.
 

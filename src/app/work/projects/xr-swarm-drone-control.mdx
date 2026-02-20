@@ -45,6 +45,16 @@ immersive, human-in-the-loop multi-robot navigation.
 
 ## VR Platform & Communication Interface
 
+<figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
+   <img src="/images/projects/project-01/xrSwarmDroneControl-Pipeline.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+  />
+  <figcaption style={{ fontSize: '1.0rem', color: '#aaa', marginTop: '0.5rem' }}>Overview of the system: navigation stack (left), 
+  bidirectional WebSocket communication layer
+(center; topics detailed in Table below), and VR visualization of drones, local planner path, and environment (right).</figcaption>
+</figure>
+
 By providing an immersive 3D interface of both the environment
 and the robot team, VR naturally functions as an integral modality
 for operator input within the shared control loop, enhancing operator situational awareness, 
@@ -64,18 +74,8 @@ monitor and influence the team in an intuitive, low-latency manner,
 while maintaining a consistent and interactive shared representation
 between the virtual and physical worlds. The implemented topics
 and related messages in the custom WebSocket based communication 
-middleware are both visualized in figure and summarized in
+middleware are both visualized in figure above and summarized in
 table below.
-
-<figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
-   <img src="/images/projects/project-01/xrSwarmDroneControl-Pipeline.jpg" 
-    alt="Control panel layout" 
-    width="100%"
-  />
-  <figcaption style={{ fontSize: '1.0rem', color: '#aaa', marginTop: '0.5rem' }}>Overview of the system: navigation stack (left), 
-  bidirectional WebSocket communication layer
-(center; topics detailed in Table I), and VR visualization of drones, local planner path, and environment (right).</figcaption>
-</figure>
 
 <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '0.5rem' }}>
   <thead>

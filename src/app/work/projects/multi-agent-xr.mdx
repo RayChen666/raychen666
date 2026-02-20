@@ -21,17 +21,19 @@ link: "https://github.com/RayChen666/Multi-Agent-XR"
 </video>
 
 ## Overview
+
 This is a real-time XR spatial intelligence system that integrates natural language command input 
 with a multi-agent backend using FastAPI and LangGraph for agentic collaborative spatial reasoning, 
 enabling dynamic, spatially coordinated XR user interactions and manipulations with scene objects, 
 demonstrating scalable multi-modal input workflows and immersive interface behaviors.
 
 ## Motivation
+
 Creating custom VR scenes inherits the idea of world building and brings it to 3D immersive space 
 from traditional 2D environments (like Minecraft). This evolution significantly expands the boundaries 
 of Reality Technology and opens new possibilities for human creativity and expression.
 
-## Limitations of existing layout systems
+## Limitations of current layout systems
 
 - **Relatively poor spatial reference handling**: current systems struggle in basic user-related commands 
 like “place the table next to me”, often misinterpreting directional references and user-relative positioning.
@@ -41,6 +43,16 @@ and spatial coherence.
 - **Limited Multi-scale spatial reasoning**: existing systems cannot handle both scene & room scale spatial 
 planning and object-scale positioning in a seemingless workflow.
 
+## Emerging Importance of Spatial Understanding
+
+- Spatial understanding systems with user view & language input can power up robots to do arrangements in the physical 
+world. For example, with multiple housekeeping robots, one prompt from the user (eg., “make the layout of the current 
+room looks more spatial”) will let robots clean the room on their own. 
+- Also, specific prompts like (“place the table here”, “give the coffee cup to me”, etc) will enable robots to do tasks for 
+people with disabilities, making their lives easier.
+- A spatial understanding system can be a better option for AI to collaborate with people in fulfilling real-world tasks like 
+rescues and surgeries. 
+
 ## Potential Research Questions
 
 - Can multi-agent collaboration produce better spatial layouts than single-agent systems?
@@ -48,11 +60,64 @@ planning and object-scale positioning in a seemingless workflow.
 - Can agents understand vague prompts from natural language? (eg., “place the table here", 
 “make the room layout cozy and more spatial”)
 
-## Pipeline Design
+## Multi-Agent Backend
+
+<figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
+   <img src="/images/projects/project-01/multiagentxr-pipeline.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+  />
+  <figcaption style={{ fontSize: '1.0rem', color: '#aaa', marginTop: '0.5rem' }}>Overview of the backend reasoning system: add/delete asset (left route), 
+  position update of existing asset (center route), vague command reasoning (right route).</figcaption>
+</figure>
+This is an AI-powered backend that translates natural language commands into precise 3D scene manipulations in virtual reality environments. Instead 
+of manual object placement, users can speak commands like "arrange four chairs around the conference table" and the system executes them automatically.
+
+**Language Agent (Natural Language Parser)**
+- Parses natural language input into structured <code style={{color: '#aaa'}}>JSON</code> data.
+- Extracts command type, target objects, and spatial relationships.
+- Routes requests to appropriate downstream agents based on complexity.
+- Output Example: "move table left" → `{command_type: "POS/ROTATE", objects: ["table"], spatial_concept: "left relative to user"}`
+
+**Asset Agent (3D Object Management)**
+- Queries 3D asset databases using tool calls.
+- Instantiates new objects with unique identifiers.
+- Manages object metadata (dimensions, categories, properties).
+- User case: For "add three chairs," creates three unique chair instances `{chair_01, chair_02, chair_03}` with associated metadata.
+
+**Scene Agent (Spatial Reasoning Engine)**
+- Calculate 3D coordinates (x, y, z) and rotation angles.
+- Interpret spatial relationships contextually (e.g., "next to" = 0.5m offset).
+- Consider user viewpoint and existing scene state.
+- Handle complex arrangements (clustering, alignment, functional grouping).
+
+**Verification Agent (Quality Assurance)**
+- Performs geometric collision checking between objects.
+- Validates scene boundaries and physical plausibility.
+- Provides structured feedback to Scene Agent for iterative refinement.
+- Feedback Loop: If verification fails, returns diagnostic information to Scene Agent 
+for recalculation (supports up to N iterations, here we set to 3 for time consideration).
+
+**Code Agent (Execution Layer)**
+- Commits validated transformations to scene database.
+- Broadcasts changes via WebSocket to connected VR clients.
+
+## Tech Stack
+- **Agent Orchestration**: LangGraph for agent coordination and state management.
+- **Spatial Reasoning**: `gemini-2.5-flash-lite`, `gemini-3-pro-preview`, `gemini-2.5-flash-image` with structured <code style={{color: '#aaa'}}>JSON</code> 
+output (each model with specialized prompt engineering used for different agents to fulfill their functions).
+- **Communication**: FastAPI backend + WebSocket for real-time VR synchronization.
+- **Web Frontend**: WebXR with Three.js and Meta Immersive Web SDK for 3D rendering.
+- **Databse**: Customized designed Python database to extract `matadata.json` information of various assets.
+
+## User Study Design
+User study design is in progress, with planned evaluation focusing on task completion time, spatial accuracy, 
+and user satisfaction metrics, will be divided into Qualitative and Quantitative measurement tests. A group of 
+15-25 people will be involved.
 
 ---
 
-### This is an ongoing project, and further updates will follow.
+### This is an ongoing project. Further updates will follow.
 
 
 
