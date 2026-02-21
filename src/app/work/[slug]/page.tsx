@@ -94,9 +94,10 @@ export default async function Project({
       />
       <Column maxWidth="s" gap="16" horizontal="center" align="center">
         <SmartLink href="/work">
-          <Text variant="label-strong-xl"
-          style={{ fontFamily: "'Cinzel Decorative', serif" }}
-          >Go back to project homepage
+          <Text variant="display-default-s"
+          //style={{ fontFamily: "'Cinzel Decorative', serif" }}
+          style = {{ fontFamily: "'Zeyada', cursive" }}
+          >Back to Projects
           </Text>
         </SmartLink>
         <Text variant="body-default-s" onBackground="neutral-weak" marginBottom="12">
@@ -126,7 +127,12 @@ export default async function Project({
         </Row>
       </Row>
       {post.metadata.images.length > 0 && (
-        <Media priority aspectRatio="16 / 9" radius="m" alt="image" src={post.metadata.images[0]} />
+        <Media 
+        priority 
+        aspectRatio="16 / 9" 
+        radius="m" 
+        alt="image" 
+        src={post.metadata.images[0]} />
       )}
       <Column style={{ margin: "auto" }} as="article" maxWidth="xs">
         <CustomMDX source={post.content} />

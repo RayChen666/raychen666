@@ -30,9 +30,10 @@ export default function Work() {
       />
       <Heading 
         marginBottom="l" 
-        variant="display-default-m" 
+        variant="display-default-xl" 
         align="center"
-        style={{ fontFamily: "'Cinzel Decorative', serif" }}
+        // style={{ fontFamily: "'Cinzel Decorative', serif" }}
+        style = {{ fontFamily: "'Zeyada', cursive" }}
       >
         {work.title}
       </Heading>
