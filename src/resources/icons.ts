@@ -1,10 +1,16 @@
 import { IconType } from "react-icons";
 import { 
+  FaFilePdf,
+  FaFile,
+} from "react-icons/fa6";
+
+import { 
   FaNodeJs,
   FaHtml5,
   FaDocker,
   FaJava,
   FaLinux,
+  FaFileAlt,
 } from "react-icons/fa";
 
 import { GrMysql } from "react-icons/gr";
@@ -99,12 +105,15 @@ export const iconLibrary: Record<string, IconType> = {
   postman: SiPostman,
   jira: SiJira,
   sql: GrMysql ,
+  pdf: FaFilePdf,
+  file: FaFileAlt,
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,
   reddit: FaReddit,
   telegram: FaTelegram,
   instagram: FaInstagram,
+  
 };
 
 export type IconLibrary = typeof iconLibrary;

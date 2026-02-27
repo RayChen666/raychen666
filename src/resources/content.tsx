@@ -48,10 +48,17 @@ const social: Social = [
     essential: true,
   },
   */
+  
   {
     name: "Email",
     icon: "email",
     link: `mailto:${person.email}`,
+    essential: true,
+  },
+  {
+    name: "Resume",
+    icon: "file",
+    link: `/resume/resume.pdf`,
     essential: true,
   },
   
