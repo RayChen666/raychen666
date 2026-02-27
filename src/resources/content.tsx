@@ -63,16 +63,13 @@ const home: Home = {
   label: "Home",
   title: `${person.name}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between design and code</>,
+  headline: <>Building immersive XR systems that blend AI, robotics, and spatial reasoning</>,
   featured: {
-    display: false,
+    display: true,
     title: (
       <Row gap="12" vertical="center">
-        <strong className="ml-4">Once UI</strong>{" "}
-        <Line background="brand-alpha-strong" vert height="20" />
-        <Text marginRight="4" onBackground="brand-medium">
-          Featured work
-        </Text>
+        <strong className="ml-4">Featured Work</strong>{" "}
+        
       </Row>
     ),
     href: "",

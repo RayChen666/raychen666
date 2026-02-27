@@ -1,4 +1,3 @@
-/*
 import {
   Heading,
   Text,
@@ -16,6 +15,7 @@ import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { FeaturedProject } from "@/components/FeaturedProject";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -68,7 +68,10 @@ export default function Home() {
             </RevealFx>
           )}
           <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
+            <Heading wrap="balance" 
+            variant="display-default-s"
+            style={{ fontFamily: "'Cinzel Decorative', serif" }}
+            >
               {home.headline}
             </Heading>
           </RevealFx>
@@ -102,8 +105,53 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
+      <RevealFx translateY="16" delay={0.6} fillWidth>
+        <FeaturedProject
+          title="XR-MultiAgent - The first system to explore collaborative agentic spatial intelligence in XR world"
+          description="A real-time XR spatial intelligence system that integrates natural language command input with a 
+          multi-agent backend using FastAPI and LangGraph for agentic collaborative spatial reasoning, enabling dynamic, 
+          spatially coordinated XR interactions with scene objects."
+          images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
+          videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
+          projectUrl="/work/multi-agent-xr"
+          codeUrl="https://github.com/RayChen666/Multi-Agent-XR"
+        />
+      </RevealFx>
+      <RevealFx translateY="16" delay={0.6} fillWidth>
+        <FeaturedProject
+          title="Flying Together - Human Guided Immersive Shared Control for Aerial Robot Teams in Unknown Environments"
+          description="Collaborated with Agile Robotics And Perception Lab (UC Berkeley) to develop the WebXR user interface, 
+          6-channel WebSocket (including odometry, mpl path, final goal, etc) connecting to ROS2 backend for various sensor 
+          control of swarm (5) drone navigation planner (full paper accepted by IEEE ICRA 2026 conference)."
+          images={["/images/projects/project-01/xrSwarmDroneControl-cover-image.jpg"]}
+          videoUrl="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4"
+          projectUrl="/work/xr-swarm-drone-control"
+          codeUrl="https://github.com/RayChen666/XR-Swarm-Drone-Control"
+        />
+      </RevealFx>
+      <RevealFx translateY="16" delay={0.6} fillWidth>
+        <FeaturedProject
+          title="AR-TelloSimulator - An Augmented Reality Drone Control Simulator"
+          description="Designed and implemented an end-to-end immersive WebXR prototyping system for real-time drone teleoperation, combining AR spatial user 
+          interfaces and live hardware control. Built custom 3D interaction widgets using three.js and Meta SDK, with a Node.js backend enabling 
+          real-time synchronization, multi-client state sharing, and low-latency command streaming to a physical drone (compiled work posted on Github)."
+          images={["/images/projects/project-01/arTelloSimulator-cover-image.jpg"]}
+          videoUrl="/images/projects/project-01/arTelloSimulator-Demo-Video.mp4"
+          projectUrl="/work/ar-tello-simulator"
+          codeUrl="https://github.com/RayChen666/AR-Tello-Simulator"
+        />
+      </RevealFx>
+      <RevealFx translateY="16" delay={0.6} fillWidth>
+        <FeaturedProject
+          title="HandGestureDJITello - Using Hand Gestures to Control Drone "
+          description="Employed pretrained TensorFlow Lite models for gesture recognition and LSTM network for 
+          storing hand gesture point history. Used MediaPipe for hand landmark extraction and OpenCV for webcam 
+          hand capture and control panel design (compiled work posted on Github)."
+          images={["/images/projects/project-01/handgestureTello-cover-image.jpg"]}
+          videoUrl="/images/projects/project-01/handgestureTello-Demo-Video.mp4"
+          projectUrl="/work/hand-gesture-dji-tello"
+          codeUrl="https://github.com/RayChen666/HandGestureDJITello"
+        />
       </RevealFx>
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
@@ -125,11 +173,12 @@ export default function Home() {
           </Row>
         </Column>
       )}
-      <Projects range={[2]} />
-      <Mailchimp />
+      <Projects range={[5]} />
     </Column>
   );
-}*/
+}
+
+/*
 'use client';
 
 import { useEffect } from 'react';
@@ -144,3 +193,4 @@ export default function Home() {
 
   return null;
 }
+*/
