@@ -22,6 +22,7 @@ const social: Social = [
   // Links are automatically displayed.
   // Import new icons in /once-ui/icons.ts
   // Set essentials: true for links you want to show on the about page
+
   {
     name: "GitHub",
     icon: "github",
