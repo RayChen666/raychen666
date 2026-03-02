@@ -101,7 +101,7 @@ export default function Home() {
                       marginRight="8"
                       style={{ marginLeft: "-0.75rem" }}
                       //src={person.avatar}
-                      src= "/images/og/IMG.jpg"
+                      src= "/images/og/IMG_01.jpg"
                       size="m"
                     />
                   )}

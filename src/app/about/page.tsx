@@ -187,17 +187,23 @@ export default function About() {
                   background="brand-alpha-weak"
                   radius="full"
                   padding="0"
-                  gap="8"
+                  gap="4"
                   marginBottom="m"
                   vertical="center"
                   className={styles.blockAlign}
                   
                   style={{
                     backdropFilter: "blur(var(--static-space-1))",
+                    
                   }}
                    >
-                  <Icon paddingLeft="8" name="googleMeet" onBackground="brand-weak" size="xs"/>
-                  <Row paddingX="1">
+                  <Icon 
+                    paddingLeft="8" 
+                    name="googleMeet" 
+                    //onBackground="brand-weak" 
+                    size="xs"
+                  />
+                  <Row paddingLeft="4">
                     <Text 
                     variant="label-default-s" 
                       //onBackground="brand-weak"
@@ -211,6 +217,7 @@ export default function About() {
                     variant="secondary"
                     icon="chevronRight"
                     size="s"
+                    
                     style={{ height: "30px", width: "30px", minHeight: "unset" }}
                   />
                 </Row>
