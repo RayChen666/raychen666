@@ -57,7 +57,7 @@ const social: Social = [
     essential: true,
   },
   {
-    name: "Resume",
+    name: "Résumé",
     icon: "resume",
     link: `/resume/raychen-resume-2026.pdf`,
     essential: true,
