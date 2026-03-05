@@ -90,7 +90,11 @@ export default function Home() {
           </RevealFx>
 
           {/* Add personal photo, name, tags, keywords and slight self-intro */ }
-          <RevealFx translateY="8" delay={0.3} fillWidth horizontal="center">
+          <RevealFx 
+            translateY="8" 
+            delay={0.3} 
+            fillWidth horizontal="center"
+          >
             <Row 
               gap="24" 
               vertical="center"
@@ -152,15 +156,18 @@ export default function Home() {
                   wrap
                 >
                   <Badge
+                    onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{height: '20px' }}
                     vertical="center"
                     textVariant="label-strong-xs"
+                    
                   >
                     Mixed Reality
                   </Badge>
                   
                   <Badge
+                    onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{height: '20px' }}
                     vertical ="center"
@@ -169,6 +176,7 @@ export default function Home() {
                     HCI
                   </Badge>
                   <Badge
+                    onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{ height: '20px' }}
                     vertical ="center"
@@ -178,15 +186,16 @@ export default function Home() {
                   </Badge>
                   <div style={{ flexBasis: '100%', height: 0 }}></div>
                    <Badge 
+                    onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{height: '20px'}}
                     vertical="center"
+                    textVariant="label-strong-xs"
                   >
-                    <Text variant="body-strong-xs" >
                     Agent System
-                    </Text>
                   </Badge>
                   <Badge
+                    onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{ height: '20px' }}
                     vertical ="center"
