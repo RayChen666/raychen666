@@ -338,7 +338,7 @@ export default function Home() {
           fillWidth 
           horizontal="center">
           <Heading 
-            paddingTop="128"
+            paddingTop="24"
             variant="display-default-l" 
             style={{ 
               fontFamily: '"Bitcount Single", sans-serif',
