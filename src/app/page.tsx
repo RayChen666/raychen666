@@ -20,6 +20,8 @@ import { Posts } from "@/components/blog/Posts";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import styles from "@/components/about/about.module.scss";
 import { ScrollButton } from '@/components/ScrollButton';
+import { LineShadowText } from "@/components/LineShadowText"
+import { Ripple } from "@/components/Ripple"
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -56,7 +58,7 @@ export default function Home() {
         style={{ 
           minHeight: '100vh', 
           justifyContent: 'center',
-          overflowX: 'hidden',
+          overflowX: 'visible',
           paddingBottom: '250px'  
         }}
       >
@@ -127,6 +129,7 @@ export default function Home() {
               paddingBottom="24"
             >
               {/* Photo */}
+              {/*
               <figure style={{ 
                           width: 'min(440px, 80vw)',   // ← shrinks on mobile
                           height: 'min(440px, 80vw)',
@@ -137,17 +140,48 @@ export default function Home() {
                           WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
                           maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
                         }}>
+                          
                           <img 
                             src="/images/self_022.png"
                             //width="100%"
                             height="100%"
                             style={{ 
                               objectFit: 'cover',
-                              display: 'block'
+                              display: 'block',
                             }}
                           />
+                 
               </figure>
+                */}
+              <div style={{ position: "relative", width: 'min(440px, 80vw)', height: 'min(440px, 80vw)' }}>
+  
+  {/* Ripple sits outside figure so mask doesn't clip it */}
+  <Ripple 
+  mainCircleSize={50} 
+  numCircles={6} 
+  color="#5ba3c9" 
+  mainCircleOpacity={0.24}
+  
+  />
 
+  {/* Photo with mask */}
+  <figure style={{ 
+    position: "relative",
+    zIndex: 1,
+    width: '100%',
+    height: '100%',
+    margin: '0',
+    border: 'none',
+    WebkitMaskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)',
+    maskImage: 'radial-gradient(circle at center, black 0%, transparent 75%)'
+  }}>
+    <img 
+      src="/images/self_022.png"
+      height="100%"
+      style={{ objectFit: 'cover', display: 'block' }}
+    />
+  </figure>
+</div>
               {/* Text content */}
               <Column 
                 gap="16" 
@@ -157,7 +191,7 @@ export default function Home() {
                  
                 
                 
-              >
+              > 
                 <Heading 
                           className={styles.textAlign} 
                           variant="display-default-l"
@@ -168,9 +202,13 @@ export default function Home() {
                             
                             fontSize: '3rem',
                           }}
-                        >
+                        > 
+                        
+                        <LineShadowText shadowColor="#5ba3c9" as="span">
                           {person.name}
-                        </Heading>
+                        </LineShadowText>
+                  </Heading>
+                  
                   <Text 
                     variant="display-default-m" 
                     className={styles.textAlign} 
@@ -203,14 +241,12 @@ export default function Home() {
                   >
                     Agent System
                   </Badge>
-
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
                     style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
-                    
                   >
                     XR
                   </Badge>
@@ -231,10 +267,7 @@ export default function Home() {
                     textVariant="label-strong-xs"
                   >
                     HCI
-                  </Badge>
-                  
-                  
-                  
+                  </Badge> 
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
@@ -244,10 +277,8 @@ export default function Home() {
                   >
                     Spatial Intelligence
                   </Badge>
-                 
                 </Row>
               </Column>
-              
             </Row>          
           </RevealFx>          
           </Column>        
@@ -263,15 +294,20 @@ export default function Home() {
           fillWidth 
           horizontal="center">
           <Heading 
-            paddingTop="24"
-            variant="display-default-l" 
+            paddingTop="16"
+            variant="display-default-s" 
+            //style={{ fontFamily: '"Bitcount Single", sans-serif',color: 'transparent', WebkitTextStroke: '0.7px #5ba3c9',}}
+            
+            onBackground="neutral-weak"
+                          
             style={{ 
-              fontFamily: '"Bitcount Single", sans-serif',
-              color: 'transparent',
-              WebkitTextStroke: '0.7px #5ba3c9',
+              fontFamily: '"Press Start 2P", cursive',           
+              //fontSize: '3rem',
             }}
           >
+          <LineShadowText shadowColor="#5ba3c9" as="span">
             Selected Work
+          </LineShadowText>
           </Heading>
         </RevealFx>
       </div>
