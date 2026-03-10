@@ -36,8 +36,8 @@ export function ScrollButton() {
   return (
     <div style={{ 
       position: 'fixed', 
-      bottom: '32px', 
-      right: '32px', 
+      bottom: '30px', 
+      right: '30px', 
       zIndex: 100,
       //borderRadius: '50%', 
       borderRadius: 'var(--radius-full)',
