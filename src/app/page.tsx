@@ -22,6 +22,7 @@ import styles from "@/components/about/about.module.scss";
 import { ScrollButton } from '@/components/ScrollButton';
 import { LineShadowText } from "@/components/LineShadowText"
 import { Ripple } from "@/components/Ripple"
+import { HeroShaderBackground } from "@/components/HeroShaderBackground"
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -59,13 +60,18 @@ export default function Home() {
           minHeight: '100vh', 
           justifyContent: 'center',
           overflowX: 'visible',
-          paddingBottom: '250px'  
+          paddingBottom: '250px',
+          position: 'relative',
         }}
       >
+        <HeroShaderBackground /> 
+
         <Column 
-        //maxWidth="s" 
-        horizontal="center" 
-        align="center">
+          //maxWidth="s" 
+          horizontal="center" 
+          align="center"
+          style={{ position: 'relative', zIndex: 1 }}
+        >
           {home.featured.display && (
             <RevealFx
               fillWidth
@@ -108,10 +114,10 @@ export default function Home() {
   
                 {/* Ripple sits outside figure so mask doesn't clip it */}
                 <Ripple 
-                mainCircleSize={50} 
+                mainCircleSize={10} 
                 numCircles={6} 
                 color="#5ba3c9" 
-                mainCircleOpacity={0.24}
+                mainCircleOpacity={1}
                 
                 />
 
@@ -163,11 +169,11 @@ export default function Home() {
                   <Text 
                     variant="display-default-m" 
                     className={styles.textAlign} 
-                    //onBackground="neutral-weak"
+                    onBackground="neutral-weak"
                     style={{ 
                       fontFamily: '"Bitcount Single", sans-serif',
                       fontSize: 'clamp(1.7rem, 4vw, 2rem)',
-                      color: 'transparent',
+                      //color: 'transparent',
                       WebkitTextStroke: '0.5px #5ba3c9',
                     }}
                     
