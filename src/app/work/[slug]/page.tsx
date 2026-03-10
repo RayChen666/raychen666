@@ -75,7 +75,7 @@ export default async function Project({
     })) || [];
 
   return (
-    <Column as="section" maxWidth="m" horizontal="center" gap="l">
+    <Column as="section" maxWidth="m" horizontal="center" gap="m">
       <Schema
         as="blogPosting"
         baseURL={baseURL}
@@ -106,8 +106,7 @@ export default async function Project({
         </Text>
         <Heading 
         variant="display-strong-s"
-        >{
-          post.metadata.title}
+        >{post.metadata.title}
           </Heading>
           {post.metadata.subtitle && (
             <Text variant="body-strong-m" onBackground="neutral-weak" align="center">
@@ -118,7 +117,9 @@ export default async function Project({
             <Keywords keywords={post.metadata.keywords} />
           )}
       </Column>
-      <Row marginBottom="0" horizontal="center">
+      <Row 
+      marginBottom="0" 
+      horizontal="center">
         <Row gap="16" vertical="center">
           {post.metadata.team && <AvatarGroup reverse avatars={avatars} size="s" />}
           <Text variant="label-default-m" onBackground="brand-weak">
