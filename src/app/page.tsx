@@ -170,7 +170,7 @@ export default function Home() {
                   <Text 
                     variant="display-default-m" 
                     className={styles.textAlign} 
-                    onBackground="neutral-weak"
+                    //onBackground="neutral-weak"
                     style={{ 
                       fontFamily: '"Bitcount Single", sans-serif',
                       fontSize: 'clamp(1.7rem, 4vw, 2rem)',
@@ -186,7 +186,7 @@ export default function Home() {
                       style={{
                         fontFamily: '"Bitcount Single", sans-serif',
                         fontSize: 'clamp(1.7rem, 4vw, 2rem)',
-                        WebkitTextStroke: '0.2px #000000'
+                        WebkitTextStroke: '0.1px #000000'
                       }}
                     >
                     {home.headline}

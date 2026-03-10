@@ -140,7 +140,7 @@ vec4 plane(vec3 ro, vec3 rd, vec3 pp, vec3 off, float aa, float n) {
   float he = height(vec2(p.x, pp.z));
   float d = p.y - he;
   float t = smoothstep(aa, -aa, d);
-  vec3 hsv = vec3(fract(0.7+0.125*sin(0.6*pp.z)), 0.5, smoothstep(aa, -aa, abs(d)-aa));
+  vec3 hsv = vec3(fract(0.55 + 0.08*sin(0.6*pp.z)), 0.6, smoothstep(aa, -aa, abs(d)-aa));
   float g = exp(-90.*max(abs(d), 0.0));
   hsv.z += g;
   hsv.z += (he*he-pp.y-0.125)*0.5;
@@ -169,15 +169,16 @@ vec3 skyColor(vec3 ro, vec3 rd) {
   float aa = 2.0/iResolution.y;
   vec2 p = rd.xy*2.0;
   p.y -= 0.25;
-  vec3 sunCol = mix(vec3(1.0, 1.0, 0.0), vec3(1.0, 0.0, 1.0), clamp((0.85 - p.y)*0.75, 0.0, 1.0));
+  vec3 sunCol = mix(vec3(0.0, 0.85, 1.0), vec3(0.95, 1.0, 1.0), 
+  clamp((0.85 - p.y)*0.75, 0.0, 1.0));
   vec3 glareCol = sqrt(sunCol);
   float ss = smoothstep(-1.05, 0.0, p.y);
-  vec3 glow = mix(vec3(1.0, 0.7, 0.6).zyx, glareCol, ss);
+  vec3 glow = mix(vec3(0.0, 0.1, 0.25), glareCol, ss);
   float s = 15.0;
   float d = df(p*s)/s;
   float db = abs(d) - 0.0025;
-  vec3 col = vec3(1.0, 0.0, 1.0)*0.125;
-  vec3 corona = 0.65*glow*exp(-2.5*d)*ss;
+  vec3 col = vec3(0.0, 0.05, 0.15)*1.0;
+  vec3 corona = 0.3*glow*exp(-2.5*d)*ss;
   col += corona;
   col = mix(col, sunCol*ss, smoothstep(-aa, aa, -d));
   col = mix(col, glow*1.55, smoothstep(-aa, aa, -db));
