@@ -24,6 +24,12 @@ import { LineShadowText } from "@/components/LineShadowText"
 import { Ripple } from "@/components/Ripple"
 import { HeroShaderBackground } from "@/components/HeroShaderBackground"
 import { AuroraText } from "@/components/AuroraText"
+import { headers } from 'next/headers'
+
+
+const headersList = await headers()
+const userAgent = headersList.get('user-agent') ?? ''
+const isMobile = /iPhone|iPad|iPod|Android/i.test(userAgent)
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -65,7 +71,7 @@ export default function Home() {
           position: 'relative',
         }}
       >
-        <HeroShaderBackground /> 
+        {!isMobile && <HeroShaderBackground />}
 
         <Column 
           //maxWidth="s" 
