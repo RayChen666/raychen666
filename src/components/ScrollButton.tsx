@@ -46,14 +46,15 @@ export function ScrollButton() {
       //overflow: 'hidden',
     }}>
       <ShineBorder
-        //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+        shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
         duration={6}
         borderWidth={0.6}
       />
       <IconButton
         onClick={handleClick}  // ← onClick instead of href
         data-border="rounded"
-        variant="secondary"
+        variant="tertiary"
+        
         icon={scrolled ? 'chevronUp' : 'chevronDown'}
         size="s"
         style={{ height: 'var(--static-space-40)', 

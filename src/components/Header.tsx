@@ -79,7 +79,7 @@ export const Header = () => {
           <Row
             //background="page"
             //background="neutral-weak"  
-            border="neutral-alpha-weak"
+            //border="neutral-alpha-weak"
             radius="m-4"
             shadow="l"
             padding="4"
@@ -88,6 +88,7 @@ export const Header = () => {
           >
             <ShineBorder
               //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+              shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
               duration={6}
               borderWidth={0.6}
             />
