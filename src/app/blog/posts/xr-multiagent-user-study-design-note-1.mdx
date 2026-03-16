@@ -1,0 +1,46 @@
+---
+title: "User Study Design Note 1"
+subtitle: "This first user study design note for XR-MultiAgent research project"
+image: "/images/blog/xr-multiagent-user-study-design-note-1/xr-multiagent-user-study-design-note-1-cover-image.jpg"
+publishedAt: "2026-03-15"
+tag: "Research Progress Report"
+---
+
+## Project Links
+
+- To access to the project description, navigate to the [XR-MultiAgent](https://raychen666.vercel.app/work/multi-agent-xr).
+
+- To access to the project code, navigate to the [Project Code](https://github.com/RayChen666/Multi-Agent-XR).
+
+## About
+
+For this blog post I'll mainly summmarize the discussion result of multiple meetings btw 
+me and Keru, me and Ken regarding to the user study design of my ongoing research project. 
+This is just a partial progress and my current thoughts, which means it will be modified 
+and updated further, so stay tuned to the upcoming blog posts on this topic.
+
+## Complex Route Design
+
+<figure style={{ maxWidth: '720px', margin: '2rem auto' }}>
+   <img src="/images/blog/xr-multiagent-user-study-design-note-1/xr-multiagent-user-study-design-note-1-complex-route-design.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+  />
+</figure>
+
+Due to the tree-node structure of the multi-agent system, at the tree root there is a conditional trigger for the 
+at which root should the user command go to, as mentioned in the XR-MultiAgent project description. The "Complex Route" 
+is designed when the user send out command that does not have clear spatial relationships involved in. For example, 
+"re-organize the whole room layout, to change this (from a living room) to an office". 
+
+To make this command work, there should be a collaboration among multiple agents (memory, asset, scene, verification 
+and execution). The memory agent, or module, extracts information for what kind of layout will be a living room look like, 
+so there is the image input. Also, due to the vagueness of the user's command, the memory module should also figure out what 
+kind of assets should be involved in the office and there amount based on the layout prediction. 
+
+Then, memory module pass these two information as JSON format to asset agent and scene agent. Asset agent first figure out the objects 
+involved and their amount, and then append those from assets folder to the scene database. Scene agent figure out the spatial 
+position of these newly added assets according to the layout prediction, verification checks the spatial coherence, and finally 
+do the execution.
+
+---

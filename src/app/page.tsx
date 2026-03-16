@@ -341,23 +341,32 @@ export default function Home() {
 
 
       {routes["/blog"] && (
-        <Column fillWidth gap="24" marginBottom="l">
-          <Row fillWidth paddingRight="64">
-            <Line maxWidth={48} />
-          </Row>
-          <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
-            <Row flex={1} paddingLeft="l" paddingTop="24">
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                Latest from the blog
+        <Column fillWidth gap="24" marginBottom="l" paddingX="l" >
+
+          <Column fillWidth gap="32" marginTop="40" s={{ direction: "column" }}>
+            <Row flex={1} paddingTop="0" horizontal="center">
+              <Heading 
+                as="h2" variant="display-strong-xs" wrap="balance"
+                 
+                onBackground="neutral-weak"
+                              
+                style={{ 
+                  fontFamily: '"Press Start 2P", cursive',           
+                  fontSize: 'clamp(1.5rem, 4vw,  2.5rem)',
+                  textAlign: 'center',
+                }}
+              >
+              <LineShadowText shadowColor="#5ba3c9">
+                Latest Posts
+              </LineShadowText>
               </Heading>
             </Row>
-            <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" />
-            </Row>
-          </Row>
-          <Row fillWidth paddingLeft="64" horizontal="end">
-            <Line maxWidth={48} />
-          </Row>
+
+            <Column flex={1} >
+            <Posts range={[1, 2]} columns="2"  gap="m" />
+            </Column>
+          </Column>
+
         </Column>
       )}
       <Projects range={[5]} />
