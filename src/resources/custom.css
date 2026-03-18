@@ -14,6 +14,15 @@
 article h2 {
   font-family: 'Cinzel Decorative', serif !important;
 }
+
+.hoverLink {
+  text-decoration: none;
+  
+}
+
+.hoverLink:hover {
+  filter: brightness(100);
+}
 /* :root {
   /*
   /* Override default variables here */

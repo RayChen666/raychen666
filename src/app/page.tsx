@@ -161,10 +161,11 @@ export default function Home() {
                             fontSize: 'clamp(2.5rem, 4vw, 3rem)'
                           }}
                         > 
-                        
+                        <a href={about.path} style={{ textDecoration: 'none', color: 'inherit' }} className="hoverLink">
                         <LineShadowText shadowColor="#5ba3c9" as="span">
                           {person.name}
                         </LineShadowText>
+                        </a>
                   </Heading>
                   
                   <Text 
@@ -275,9 +276,11 @@ export default function Home() {
               fontSize: 'clamp(1.5rem, 4vw,  2.5rem)',
             }}
           >
-          <LineShadowText shadowColor="#5ba3c9" as="span">
-            Selected Work
-          </LineShadowText>
+          <a href={work.path} style={{ textDecoration: 'none', color: 'inherit' }} className="hoverLink">
+            <LineShadowText shadowColor="#5ba3c9" as="span">
+              Selected Work
+            </LineShadowText>
+          </a>
           </Heading>
         </RevealFx>
       </div>
@@ -356,9 +359,11 @@ export default function Home() {
                   textAlign: 'center',
                 }}
               >
+              <a href="/blog" style={{ textDecoration: 'none', color: 'inherit' }} className="hoverLink">
               <LineShadowText shadowColor="#5ba3c9">
                 Latest Posts
               </LineShadowText>
+              </a>
               </Heading>
             </Row>
 
