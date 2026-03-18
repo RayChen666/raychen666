@@ -182,12 +182,11 @@ export default function Home() {
                   >
                     <AuroraText
                       colors={["#5ba3c9", "#67e8f9", "#7dd3fc", "#93c5fd"]}
-                      //colors={["#67e8f9", "#7dd3fc"]}
                       speed={1}
                       style={{
                         fontFamily: '"Bitcount Single", sans-serif',
                         fontSize: 'clamp(1.7rem, 4vw, 2rem)',
-                        WebkitTextStroke: '0.3px #000000'
+                        WebkitTextStroke: '0.25px #000000'
                       }}
                     >
                     {home.headline}
