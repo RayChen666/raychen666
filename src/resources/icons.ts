@@ -4,6 +4,7 @@ import { AiFillMail} from "react-icons/ai";
 import { 
   FaFilePdf,
   FaFile,
+  FaRedditAlien,
 } from "react-icons/fa6";
 
 import { 
@@ -118,7 +119,7 @@ export const iconLibrary: Record<string, IconType> = {
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,
-  reddit: FaReddit,
+  reddit: FaRedditAlien,
   telegram: FaTelegram,
   instagram: FaInstagram,
   

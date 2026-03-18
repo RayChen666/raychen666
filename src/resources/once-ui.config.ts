@@ -213,7 +213,7 @@ const socialSharing: SocialSharingConfig = {
     facebook: false,
     pinterest: false,
     whatsapp: false,
-    reddit: false,
+    reddit: true,
     telegram: false,
     email: true,
     copyLink: true,
