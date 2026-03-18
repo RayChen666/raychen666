@@ -206,6 +206,7 @@ export default function Home() {
                    <Badge 
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
+                    border="neutral-alpha-weak"
                     style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
@@ -215,6 +216,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
+                    border="neutral-alpha-weak"
                     style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
@@ -224,6 +226,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
+                    border="neutral-alpha-weak"
                     style={{ height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"
@@ -233,6 +236,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
+                    border="neutral-alpha-weak"
                     style={{height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"
@@ -242,6 +246,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-weak"
                     background ="brand-alpha-weak"
+                    border="neutral-alpha-weak"
                     style={{ height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"

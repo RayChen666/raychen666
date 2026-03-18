@@ -18,8 +18,8 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       href={`/blog/${post.slug}`}
       transition="micro-medium"
       direction={direction}
-      border="neutral-alpha-strong"
-      background="transparent"
+      border="neutral-alpha-weak"
+      background="brand-alpha-weak"
       padding="4"
       radius="l-4"
       gap={direction === "column" ? undefined : "24"}
@@ -44,7 +44,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
               <Avatar src={person.avatar} size="s" />
               <Text variant="label-default-s">{person.name}</Text>
             </Row>*/}
-            <Text variant="body-default-xs" onBackground="neutral-weak">
+            <Text variant="body-default-s" onBackground="neutral-weak">
               {formatDate(post.metadata.publishedAt, false)}
             </Text>
           </Row>
@@ -52,7 +52,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
             {post.metadata.title}
           </Text>
           {post.metadata.tag && (
-            <Text variant="label-strong-s" onBackground="neutral-weak">
+            <Text variant="label-strong-m" onBackground="neutral-weak">
               {post.metadata.tag}
             </Text>
           )}

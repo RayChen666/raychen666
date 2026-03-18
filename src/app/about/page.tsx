@@ -232,7 +232,7 @@ export default function About() {
                 {/* Desktop: small pill button */}
                 <Row s={{ hide: true }}
                   fitWidth
-                  border="brand-alpha-medium"
+                  border="neutral-alpha-weak"
                   background="brand-alpha-weak"
                   radius="full"
                   padding="0"
@@ -260,7 +260,7 @@ export default function About() {
                 <Row hide s={{ hide: false }} marginBottom="m" className={styles.blockAlign}>
                   <Row
                     fitWidth
-                    border="brand-alpha-medium"
+                    border="neutral-alpha-weak"
                     background="brand-alpha-weak"
                     radius="full"
                     paddingX="12"
