@@ -13,3 +13,34 @@ tag: "Literature Review"
 - To access to the project code, navigate to the [Project Code](https://github.com/RayChen666/Multi-Agent-XR).
 
 ## Article Links
+
+- [Improving Obstacle Awareness to Enhance Interaction in Virtual Reality
+](https://ieeexplore.ieee.org/document/9089649)
+
+- [LLplace: The 3D Indoor Scene Layout 
+Generation and Editing via Large Language Model](https://arxiv.org/abs/2406.03866)
+
+- [LayoutGPT: Compositional Visual Planning and Generation with Large Language Models
+](https://proceedings.neurips.cc/paper_files/paper/2023/hash/3a7f9e485845dac27423375c934cb4db-Abstract.html)
+
+## Review of article one
+
+From article "[Improving Obstacle Awareness to Enhance Interaction in Virtual Reality
+](https://ieeexplore.ieee.org/document/9089649)", the core novelty of this paper is an **augmented virtuality 
+approach** to obstacle awareness — instead of showing jarring, out-of-context safety warnings (like Valve's 
+Chaperone grid), the system replaces **real-world** obstacles with thematically coherent virtual objects. A chair 
+in your real room might become a rock in a virtual forest, occupying the exact same physical space. The user 
+stays immersed while still being protected from collisions.
+
+The key insight is that **contextual integration preserves presence** better than any overlay-based warning system, 
+which their IPQ user study confirmed. However, since our research is totally in the VR environment, which means there 
+is no interaction to the real-world, this part has no relationship to our verification agent design.
+
+The main **limitation** the authors acknowledge is that this is offline — the room must be pre-scanned, so dynamic changes 
+(someone moving a chair mid-session) aren't captured in real time. While this is not a big problem for our system, since 
+it accept "dynamic updates" to the assets in the virtual world, so all the collision can be calculated in real-time (as 
+long as we have multiple RTX 5090 GPU cards).
+
+## Obsticle Detection
+
+
