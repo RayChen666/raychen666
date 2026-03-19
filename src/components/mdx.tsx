@@ -92,7 +92,14 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
   }: Omit<React.ComponentProps<typeof HeadingLink>, "as" | "id">) => {
     const slug = slugify(children as string);
     return (
-      <HeadingLink marginTop="24" marginBottom="12" as={as} id={slug} {...props}>
+      <HeadingLink 
+      marginTop="24" 
+      marginBottom="12" 
+      as={as} 
+      id={slug} 
+      data-border="rounded" 
+      {...props}
+      >
         {children}
       </HeadingLink>
     );
