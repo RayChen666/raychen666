@@ -376,7 +376,7 @@ export default function Home() {
             </Row>
 
             <Column flex={1} >
-            <Posts range={[1, 2]} columns="2"  gap="m" />
+            <Posts range={[1, 2]} columns="1"  gap="m" thumbnailWidth={18}/>
             </Column>
           </Column>
 

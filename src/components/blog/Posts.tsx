@@ -9,15 +9,17 @@ interface PostsProps {
   direction?: "row" | "column";
   exclude?: string[];
   gap?: "8" | "16" | "24" | "32" | "m";
+  thumbnailWidth?: number;
 }
 
 export function Posts({
   range,
   columns = "1",
-  thumbnail = false,
+  thumbnail = true,
   exclude = [],
   direction,
   gap = "m",
+  thumbnailWidth,
 }: PostsProps) {
   let allBlogs = getPosts(["src", "app", "blog", "posts"]);
 
@@ -39,7 +41,7 @@ export function Posts({
       {displayedBlogs.length > 0 && (
         <Grid columns={columns} s={{ columns: 1 }} fillWidth marginBottom="40" gap={gap}>
           {displayedBlogs.map((post) => (
-            <Post key={post.slug} post={post} thumbnail={thumbnail} direction={direction} />
+            <Post key={post.slug} post={post} thumbnail={thumbnail} direction={direction} thumbnailWidth={thumbnailWidth}/>
           ))}
         </Grid>
       )}

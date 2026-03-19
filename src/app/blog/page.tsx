@@ -39,18 +39,18 @@ export default function Blog() {
       >
         {blog.title}
       </Heading>
-      <Column fillWidth flex={1} gap="40">
-        <Posts range={[1, 1]} thumbnail />
-        <Posts range={[2, 3]} columns="2" thumbnail direction="column" />
+      <Column fillWidth flex={1} gap="32">
+        {/*<Posts range={[1, 1]} thumbnail={true} />*/}
+        <Posts range={[1, 4]} columns="2"  thumbnail direction="column" />
         <Mailchimp marginBottom="l" />
-        <Heading as="h2" 
-          variant="display-default-m" 
-          marginLeft="l"
-          style = {{ fontFamily: "'Zeyada', cursive" }}
-        >
-          Earlier Posts
-        </Heading>
-        <Posts range={[4]} columns="2" />
+          <Heading as="h2" 
+            variant="display-default-m" 
+            marginLeft="l"
+            style = {{ fontFamily: "'Zeyada', cursive" }}
+          >
+            Earlier Posts
+          </Heading>
+        <Posts range={[5]} columns="2" thumbnail={false}/>
       </Column>
     </Column>
   );

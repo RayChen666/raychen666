@@ -8,9 +8,10 @@ interface PostProps {
   post: any;
   thumbnail: boolean;
   direction?: "row" | "column";
+  thumbnailWidth?: number;
 }
 
-export default function Post({ post, thumbnail, direction }: PostProps) {
+export default function Post({ post, thumbnail, direction, thumbnailWidth}: PostProps) {
   return (
     <Card
       fillWidth
@@ -26,6 +27,11 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
       s={{ direction: "column" }}
     >
       {post.metadata.image && thumbnail && (
+        <Column 
+        maxWidth={thumbnailWidth ?? undefined} s={{ maxWidth: "unset" }}
+        style={{ width: thumbnailWidth ? undefined : '100%' }}
+        className={thumbnailWidth ? 'thumbnail-constrained' : ''}
+        >
         <Media
           priority
           sizes="(max-width: 768px) 100vw, 640px"
@@ -36,6 +42,7 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
           alt={"Thumbnail of " + post.metadata.title}
           aspectRatio="16 / 9"
         />
+        </Column>
       )}
       <Row fillWidth>
         <Column maxWidth={28} paddingY="24" paddingX="l" gap="20" vertical="center">

@@ -23,6 +23,13 @@ article h2 {
 .hoverLink:hover {
   filter: brightness(2);
 }
+
+@media (max-width: 768px) {
+  .thumbnail-constrained {
+    max-width: unset !important;
+    width: 100% !important;
+  }
+}
 /* :root {
   /*
   /* Override default variables here */
