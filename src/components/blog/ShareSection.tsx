@@ -108,17 +108,31 @@ export function ShareSection({ title, url }: ShareSectionProps) {
       <Text variant="label-default-l" onBackground="neutral-weak">
         Share this post:
       </Text>
-      <Row data-border="rounded" gap="16" horizontal="center" wrap>
+      <Row 
+      data-border="rounded" 
+      gap="16" 
+      horizontal="center" 
+      wrap>
         {enabledPlatforms.map((platform, index) => (
-          <Button key={index} variant="secondary" size="s" href={platform.generateUrl(title, url)} prefixIcon={platform.icon} />
+          <Button 
+          key={index} 
+          variant="secondary" 
+          size="m" 
+          href={platform.generateUrl(title, url)} 
+          prefixIcon={platform.icon}
+          //style={{ border: "1px solid var(--neutral-alpha-medium)" }}
+          style={{ border: "1px solid var(--transparent)" }}
+           />
         ))}
         
         {socialSharing.platforms.copyLink && (
           <Button
             variant="secondary"
-            size="s"
+            size="m"
             onClick={handleCopy}
             prefixIcon="openLink"
+            //style={{ border: "1px solid var(--neutral-alpha-medium)" }}
+            style={{ border: "1px solid var(--transparent)" }}
           />
         )}
       </Row>
