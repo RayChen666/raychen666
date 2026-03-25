@@ -2,7 +2,7 @@
 title: "Literature Review Note 2"
 subtitle: "The literature review note for XR-MultiAgent research project"
 image: "/images/blog/6-literature-review-note-2/cover-image.jpg"
-publishedAt: "2026-03-23"
+publishedAt: "2026-03-24"
 tag: "Literature Review"
 ---
 
@@ -52,19 +52,156 @@ unlikely since this will deviate from the coherence of the scene scaling).
 
 ## Layout Generation
 
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/6-literature-review-note-2/layout-prediction.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
 One thing worth noting for this article, is that it utilizes [LayoutGPT](https://arxiv.org/abs/2305.15393) for the training data of 
 layout generalization. This layout generation pipeline may help with our complex route design, as it fully aligns with our use case.
 
-## Limitations
+The idea in this article provides some hint to how are we going to design the complex route, which is to split the layout reasoning step - 
+**memory agent does semantic layout, scene agent does geometric layout**. 
+
+- **Semantic layout** (memory agent): "In an office, the primary work surface anchors the space. It should be against a wall, ideally 
+facing the room. Secondary furniture clusters around it functionally."
+
+- **Geometric layout** (scene agent): Given semantic intent + room dimensions + bounding boxes → compute exact `{x, y, z, rotation}` for 
+each object.
+
+So the memory agent produces something like: 
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`
+{
+    "layout_semantics": {
+        "anchor_object": "desk",
+        "anchor_placement": "against_longest_wall",
+        "cluster": [
+        {"type": "office_chair", "relation": "in_front_of", "reference": "desk"},
+        {"type": "monitor", "relation": "on_surface_of", "reference": "desk"},
+        {"type": "bookshelf", "relation": "adjacent_to", "reference": "desk"}
+        ],
+        "room_function": "focused_individual_work"
+    } 
+}
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+And the scene agent translates this relational description into exact coordinates using the bounding box information from the asset agent
+ — very similar to LLplace's coordinate prediction step but driven by semantic relations rather than raw room type.
+
+## Image Input
+
+**The image isn't for understanding the current scene** (that's the JSON state sync's job), **it's for grounding the target room 
+type's semantic layout**. The LLM's parametric knowledge gives you a list of objects. But the spatial semantic structure — where the 
+anchor object sits relative to walls, how clusters are arranged, what the circulation space looks like — that's much harder to get from 
+text alone. An example image makes it concrete and unambiguous.
+
+**So the two inputs serve completely different purposes:**
+
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`
+Current scene JSON → "What is HERE right now?"
+                              ↓
+                        Object compatibility
+                        Space availability
+                        Room dimensions
+
+Target room image  → "What should it LOOK LIKE?"
+                              ↓
+                        Anchor object placement
+                        Functional zone structure
+                        Cluster relations
+                        Circulation patterns
+`,
+        language: "txt",
+        label: "Workflow"
+      }
+    ]}
+/>
+
+**The actual memory agent prompt structure then becomes:**
+<CodeBlock
+    marginBottom="16"
+    codes={[
+      {
+        code:
+`
+System: You are a room conversion semantic planner.
+
+Inputs:
+  1. Current scene state: {JSON}        ← what exists
+  2. Target room type: "office"         
+  3. Reference layout image: {image}    ← what it should look like spatially
+  4. Room dimensions: {dims}            ← hard constraints
+
+Your task:
+  Step 1: From the image, extract the semantic 
+          layout structure of the target room type
+          - What is the anchor object?
+          - What are the functional zones?
+          - How do clusters relate spatially?
+
+  Step 2: Map current scene JSON onto this structure
+          - What freed space aligns with each zone?
+          - What existing objects fit which zone?
+
+  Step 3: Output relational semantic layout JSON
+          for the scene agent to translate to coordinates
+
+Output:
+{
+  "anchor_object": "desk",
+  "functional_zones": {...},
+  "cluster_relations": [...],
+  "spatial_constraints_from_current_scene": {...}
+}
+`,
+        language: "JSON",
+        label: "JSON"
+      }
+    ]}
+/>
+
+## Limitation
 
 - **Question:** What will happen if there are 2 identical objects (e.g., 2 lamps) in the scene, while user says: "delete a lamp"?
 
 - **Answer:** According to the article, since this is directly managed by the LLM, perhaps it will randomly choose a lamp to delete, as 
-long as it is named "lamp".
+long as that object is named "lamp".
 
 Though this is not mentioned directly in the article, it reveals a **limitation** of the system design - the system is lack of embodied 
 user-centric awareness (we cannot be too harsh on it since it is not primarily a HCI paper, but this worth noting for our research). This 
 , while seems vague, is essential for enabling a smooth and coherent user experience. 
 
 
+## Open Questions
 
+**Question:** Where does the reference image come from?
+
+**Answer:** This is a practical question worth resolving. A few options:
+
+- **Static library** — curated set of canonical room type images per room type, retrieved by room type string. Simple 
+and deterministic.
+
+- **Retrieved from web** — more varied but introduces noise.
+
+- **Generated** — use a text-to-image model to synthesize a reference layout. Interesting but adds complexity.
+
+The static library is probably right for a research system — it's reproducible, controllable, and you can cite it cleanly in the paper.
