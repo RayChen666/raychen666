@@ -16,3 +16,55 @@ tag: "Literature Review"
 
 - [LLplace: The 3D Indoor Scene Layout 
 Generation and Editing via Large Language Model](https://arxiv.org/abs/2406.03866)
+
+- [LayoutGPT: Compositional Visual Planning 
+and Generation with Large Language Models](https://arxiv.org/abs/2305.15393)
+
+**The second article may not be mainly reviewed in this blog post but it is essential to understand 
+the first article, which I will focus on for this post.**
+
+## Literature Review
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/6-literature-review-note-2/article-pipeline.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+In the article "[LLplace: The 3D Indoor Scene Layout Generation and Editing via Large Language 
+Model](https://arxiv.org/abs/2406.03866)", it gives a system work & pipeline on how to generate an editable scene in the virtual reality, 
+through its uniquely designed bounding box mechanism. This mechanism is kind of adding a generalization layer to the system in each stage 
+to make the scene editing much easier and manageable. Different from my research purpose, the bounding box here is used to regulate the size 
+and spatial occupancy of the objects to make the scene more accessable, so the bounding box here is generated in real-time before the further 
+edition of the scene. However, the bounding box of our assets is pre-programmed in the `metadata.json` file in the object folder, sicne the 
+`default_scale` of the object is fixed. 
+
+- For example, `"default_scale": {
+      "x": 0.005,
+      "y": 0.005,
+      "z": 0.005
+    }` of a typical chair in the `metadata.json`.
+
+In our use case, only when user wants to scale up a specific object should our system generate a bounding box in real-time (which is 
+unlikely since this will deviate from the coherence of the scene scaling).
+
+## Layout Generation
+
+One thing worth noting for this article, is that it utilizes [LayoutGPT](https://arxiv.org/abs/2305.15393) for the training data of 
+layout generalization. This layout generation pipeline may help with our complex route design, as it fully aligns with our use case.
+
+## Limitations
+
+- **Question:** What will happen if there are 2 identical objects (e.g., 2 lamps) in the scene, while user says: "delete a lamp"?
+
+- **Answer:** According to the article, since this is directly managed by the LLM, perhaps it will randomly choose a lamp to delete, as 
+long as it is named "lamp".
+
+Though this is not mentioned directly in the article, it reveals a **limitation** of the system design - the system is lack of embodied 
+user-centric awareness (we cannot be too harsh on it since it is not primarily a HCI paper, but this worth noting for our research). This 
+, while seems vague, is essential for enabling a smooth and coherent user experience. 
+
+
+

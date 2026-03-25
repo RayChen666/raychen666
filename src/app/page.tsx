@@ -204,7 +204,7 @@ export default function Home() {
                    <Badge 
                     onBackground="neutral-medium"
                     background ="brand-alpha-weak"
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
@@ -214,7 +214,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-medium"
                     background ="brand-alpha-weak"
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     style={{height: '20px'}}
                     vertical="center"
                     textVariant="label-strong-xs"
@@ -224,7 +224,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-medium"
                     background ="brand-alpha-weak"
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     style={{ height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"
@@ -234,7 +234,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-medium"
                     background ="brand-alpha-weak"
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     style={{height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"
@@ -244,7 +244,7 @@ export default function Home() {
                   <Badge
                     onBackground="neutral-medium"
                     background ="brand-alpha-weak"
-                    border="neutral-alpha-weak"
+                    border="neutral-alpha-medium"
                     style={{ height: '20px' }}
                     vertical ="center"
                     textVariant="label-strong-xs"
