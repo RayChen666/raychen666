@@ -105,35 +105,39 @@ model priming
 
 - Requires audio capture pipeline in WebXR, which adds implementation complexity
 
-<table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '0.5rem' }}>
-  <thead>
-    <tr style={{ borderBottom: '2px solid #444' }}>
-      <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Dimension</th>
-      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Headset Native</th>
-      <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Web Speech API</th>
-      <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Gemini/Whisper</th>
-    </tr>
-  </thead>
-  <tbody>
-    {[
-      ['Accuracy', 'Medium', 'Low-Medium', 'High'],
-      ['Latency', 'Lowest', 'Low', 'Medium (network)'],
-      ['WebXR compatibility', 'Poor', 'Medium', 'Good'],
-      ['Cost', 'Free', 'Free', 'Per-call'],
-      ['Domain adaptation', 'None', 'None', 'Yes'],
-      ['Implementation complexity', 'High', 'Low', 'Medium'],
-      ['Portability', 'Quest only', 'Cross-browser', 'Any platform'],
-      ['Interim results', 'Limited', 'Yes', 'No (Whisper) / Yes (streaming Gemini)'],
-    ].map(([dimension, native, webSpeech, gemini]) => (
-      <tr key={dimension} style={{ borderBottom: '1px solid #333' }}>
-        <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{dimension}</code></td>
-        <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{native}</td>
-        <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{webSpeech}</td>
-        <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{gemini}</td>
+**Summarization**
+
+<div style={{ overflowX: 'auto', width: '100%', marginBottom: '0.5rem' }}>
+  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '520px' }}>
+    <thead>
+      <tr style={{ borderBottom: '2px solid #444' }}>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem 0.5rem 0' }}>Dimension</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Headset Native</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 1rem' }}>Web Speech API</th>
+        <th style={{ textAlign: 'left', padding: '0.5rem 0 0.5rem 1rem' }}>Gemini/Whisper</th>
       </tr>
-    ))}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {[
+        ['Accuracy', 'Medium', 'Low-Medium', 'High'],
+        ['Latency', 'Lowest', 'Low', 'Medium (network)'],
+        ['WebXR compatibility', 'Poor', 'Medium', 'Good'],
+        ['Cost', 'Free', 'Free', 'Per-call'],
+        ['Domain adaptation', 'None', 'None', 'Yes'],
+        ['Implementation complexity', 'High', 'Low', 'Medium'],
+        ['Portability', 'Quest only', 'Cross-browser', 'Any platform'],
+        ['Interim results', 'Limited', 'Yes', 'No (Whisper) / Yes (streaming Gemini)'],
+      ].map(([dimension, native, webSpeech, gemini]) => (
+        <tr key={dimension} style={{ borderBottom: '1px solid #333' }}>
+          <td style={{ padding: '0.6rem 1rem 0.6rem 0' }}><code>{dimension}</code></td>
+          <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{native}</td>
+          <td style={{ padding: '0.6rem 1rem', color: '#aaa' }}>{webSpeech}</td>
+          <td style={{ padding: '0.6rem 0 0.6rem 1rem', color: '#aaa' }}>{gemini}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 **Proposed Solution:**
 
