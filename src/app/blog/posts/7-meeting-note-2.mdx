@@ -14,25 +14,40 @@ tag: "Research Meeting"
 
 ## Meeting Content
 
-- Project related Q&A.
+Project related Q&A.
 
-- Discussion on voice input API choice (reach consensus on using Gemini API input).
+- Discussion on the effect of 3D scanning real life objects, **voxelizing** them, and adding them in the XR system in real-time. 
+However, it does not relate to our project because our project is pure VR and wouldn’t involve us moving around a lot physically.
 
-- Go over the literature review on complex route design.
+- Discussion on voice input API choice (reach consensus on using direct transcript + LLM contextual intepretation layer).
+
+- Go over the literature review on complex route design
 
 - Leave obsticle detection topic to next week (as it is not the priority)
+
+- **Bonus:** Saurabh also accidentally found that the verification step does not check the bounding boxes when performing object placement 
+and collision detection. He saw that when prompted “place a table in front of the chairs” ➔ The system placed it in a way which caused 
+the table clipped through the walls/ bounding box/ unmovable objects placed in the scene. We need to solve this!
 
 ## Task list
 
 **Saurarbh:**
 
-- Fully implement the detele function of Asset agent (separate cases for single 
+- Already added a preliminary version of the “remove” function, albeit it is not yet robust.
+
+What need to be done: 
+
+- Fully implement the delete function of Asset agent (separate cases for single 
 object removal and multiple object removal). The various number of deletion for different 
 assets also need to be programmed into cases. For example, given the case that there are 2 
 lamps and 3 tables within the scene, when user say, I want to remove a lamp and two tables, 
 the system should be able delete with corresponding number of the assets.
 
-- Complete STT (Speech-to-Text) documentation (and Ray will add this to meeting blog afterwards).
+- Complete STT (Speech-to-Text) documentation **(Done, Ray added to meeting note blog)**: 
+This is something we believe is the need of the hour, not to contribute to the novelty of the research, 
+but to facilitate the generation of use cases. Traditional Keyboards inside VR rely on using the controller 
+to type, while modern headsets now offer hand tracking too. Both methods are cumbersome, especially given we 
+might have many use cases to work on in the future.
 
 **Ray:**
 
@@ -41,6 +56,78 @@ the system should be able delete with corresponding number of the assets.
 - 2 new literature reviews (need to find).
 
 - Continue to work on the complex reasoning route (In progress).
+
+## Speech-to-Text
+
+We (Saurarbh and I) explored various ways to implement the STT features in the system. Here are some of the 
+ways we can implement the features, and the latest tech in the current market.
+
+Web browser based STT integration: We agreed that this is the best way to have it running within minutes! However, 
+there are important caveats to understand when using Browser based STT integration such as:
+
+- Not all browsers support it, such as Firefox. (This is ok as we control this by forcing all users use Chrome 
+during the user study)
+
+- The reliability of STT itself is another concern. What about noise? Accents? Tonal inflections and other 
+various ways humans speak that might make the model transcribe incorrectly? It doesn’t affect our research, 
+but it certainly affects the use case collection phase.
+
+Gemini API: This is a cloud based STT integration, that uses the Google Cloud service. It offers excellent uptime 
+and reliability and is a much better STT model. It solves most problems stated above with native browser integrations.
+
+- **Pro:** Native integration to existing backend.
+
+- **Con:** Latency issue. (for utilizing Gemini API)
+
+OpenAI Whisper: **Saurabh** thinks that this is the best STT model on the market. With a slightly additional latency, 
+the model is able to transcribe near perfect text from speech of almost any kind. Whisper is able to correct 
+mispronunciations, heavy accents, filter out noisy background, tonal inflections and hesitations in speech such 
+as “uhhh”s and “ahhh”s
+
+**Concerns:**
+
+- OpenAI does not offer a free tier/Freemium API, hence the costs would add up. Not to mention Whisper integration 
+is local, and much heavier.
+
+- Needs more engineering job to satisfy a work that does not related to the research topic.
+
+**Conclusion**
+
+- Use the Laptop and VR browser to get the transcription, then add an LLM layer on top of it, to clean up the text. 
+We found it gives the fastest results despite the added layer of the LLM API call.
+
+- It is excellent at cleaning up, which Whisper does at real time much slower.
+
+Given the right prompts, we can also clean up hesitations and other unreliable human speech inputs. Examples include:
+
+- `“Alright…add uhhhh a Table in front of maybe…the chair?” ➔ “Add a table in front of the chair”`
+
+- `“Let’s add two chairs… hold on… add three chairs behind the table” ➔ “Add three chairs behind the table”` 
+(user’s newer intent was taken as the final intent). This is important, especially from an HCI perspective because human 
+speech is pretty messy.
+
+## Delete function
+
+- The current version of “delete” skips the Scene Agent and Verification Agent entirely. 
+
+Hence, although simple commands like “Remove the Chair” indeed removes the chair, more complex commands like “remove 
+the chair to the right of the table” removes ALL chairs, because the route is not yet wired to the scene agent for it to 
+smartly infer spatial concepts such as “left of table”. This will be corrected, hopefully before next Thursday weekly meetup.
+
+- We also have to figure out whether the Vague/Complex route is able to use the delete feature correctly when performing 
+complex tasks in conjunction with “add”.
+
+## Gesture
+
+We agreed that adding gestures to explicitly nudge the LLM in a particular direction goes against the **spirit** of the research, since 
+explicit gesturing makes LLM inference “easier”.
+
+**Example:** `Point to a chair and say “delete this chair” ➔ The LLM now explicitly *KNOWS* which chair to delete.` Making it feel like a game 
+with an LLM wrapper than a non-deterministic intelligent spatial system!
+
+Given we want to push the limits of the emergent nature of LLMs, adding explicit gesturing wouldn’t be a good thing? 
+**(This needs further investigation ➔ Confirm with Ken and Keru)** However, we think that adding gestures might present 
+us with much richer user studies where we can compare what various users feel about “being in control” vs relying entirely on the LLMs.
 
 ## Deadline
 
