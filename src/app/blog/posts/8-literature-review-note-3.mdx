@@ -2,7 +2,7 @@
 title: "Literature Review Note 3"
 subtitle: "The literature review note for XR-MultiAgent research project"
 image: "/images/blog/8-literature-review-note-3/cover-image.jpg"
-publishedAt: "2026-03-30"
+publishedAt: "2026-04-02"
 tag: "Literature Review"
 ---
 
@@ -18,6 +18,112 @@ tag: "Literature Review"
 and Generation with Large Language Models](https://arxiv.org/abs/2305.15393)
 
 ## Literature Review
+
+In the article "[LayoutGPT: Compositional Visual Planning and Generation with Large Language Models](https://arxiv.org/abs/2305.15393)", 
+the core thesis is that LLMs can serve as visual planners — converting natural language descriptions into structured spatial layouts 
+without any task-specific fine-tuning. The system is training-free and relies entirely on in-context learning with CSS-formatted 
+demonstrations to activate the LLM's spatial reasoning.
+ 
+This is essentially the same intellectual bet our **Multi-Agent-XR** is making: that an LLM, given the right representation, can reliably 
+translate natural language commands into spatial scene state. LayoutGPT validates this bet empirically, which matters for our 
+related work framing.
+
+## Structured Output formatted
+
+This is the part of the paper I found most directly useful for our research.
+ 
+The key insight is that **how you represent spatial information to an LLM changes the quality of spatial reasoning significantly**. 
+LayoutGPT's ablation study (Table 4, Section 4.4) tested three different output representations:
+ 
+- **Raw sequence** — comma-separated numbers like `0.50, 0.71, 0.50, 0.15`. The LLM has no semantic grounding for what these values mean.
+
+- **CSS format without normalization** — `object { width: 0.50; height: 0.71; left: 0.50; top: 0.15; }`. Each value is labeled.
+
+- **CSS format with normalization** — `object { width: 32px; height: 45px; left: 31px; top: 9px; }`. Labeled and expressed as integers 
+in a familiar unit (pixels).
+
+The full combination — CSS structure plus normalization — consistently outperformed the others. The CSS format alone gave the biggest 
+single boost, and the paper's argument is that LLMs are pretrained on massive code datasets including actual CSS, so this format 
+activates spatial knowledge already encoded in the model weights rather than asking it to reason from scratch.
+
+**Why this maps directly to Multi-Agent-XR?** 
+
+Our scene state is a JSON object describing objects with position, rotation, scale, 
+and asset ID. This is structurally the same design decision — choosing a representation that an LLM can semantically reason about 
+rather than an opaque numeric array. LayoutGPT's ablation gives us empirical backing for a claim we can make in our paper: that 
+the scene JSON schema is a deliberate design choice that improves spatial reasoning quality, not just an engineering convenience.
+
+One nuance worth noting: LayoutGPT's output format is essentially **write-only** — the LLM generates a layout from scratch. Our 
+scene JSON is **read-write** — agents both read the current scene state and write modifications back. This makes our format design 
+more constrained because it also needs to support unambiguous delta operations, not just generation. That's a meaningful point of 
+differentiation rather than just replication.
+
+## LLM as Spatial planner
+
+The paper's quantitative result is clear: LayoutGPT outperforms end-to-end text-to-image models (Stable Diffusion, Attend-and-Excite) 
+by **20–40%** on spatial and numerical accuracy. The argument is that using layout as an intermediate representation gives the LLM a 
+dedicated reasoning step rather than collapsing everything into a single inference pass.
+
+That is the same architectural idea behind our multi-agent design — specialized agents with distinct responsibilities produce 
+more reliable outputs than a single monolithic model call. We can cite LayoutGPT as prior evidence that decomposing the spatial 
+reasoning step (layout planning) from the generation step (image synthesis) improves compositional faithfulness. Our system 
+extends this decomposition further into a full agent pipeline.
+
+## In-Context Info Retrieval
+
+Section 3.3 describes how LayoutGPT selects supporting demonstrations via retrieval — using CLIP similarity for 2D prompts and 
+Euclidean distance on room dimensions for 3D synthesis. The closer the exemplar to the test condition, the better the layout.
+ 
+This is conceptually related to how our Memory Agent works. Rather than generating from parametric knowledge alone, both systems 
+ground their spatial reasoning in prior scene examples. For LayoutGPT it is training exemplars; for our Memory Agent it is the 
+current scene JSON and delta planning against a known prior state. The underlying principle is the same: anchor generation in 
+concrete prior context rather than unconstrained generation.
+
+## Static vs. Dynamic Interaction
+
+The most important **distinction** btw LayoutGPT and our Multi-Agent-XR for our related work section is the interaction mode.
+
+LayoutGPT is a **single-shot static planner** — one natural language prompt in, one layout out. There is no mechanism for 
+iterative scene manipulation, multi-turn commands, live synchronization with a running 3D environment, or user-in-the-loop 
+editing. The user cannot say "move the desk a bit to the left" after the first generation.
+
+Multi-Agent-XR is fundamentally an **interactive, stateful system**. The scene JSON persists and evolves across commands. 
+The Memory Agent tracks delta changes across turns. The pipeline handles spatially underspecified commands (our Complex Route) 
+that require reasoning about what already exists in the scene. This is a different problem class entirely — closer to conversational 
+scene editing than one-shot layout synthesis.
+ 
+This makes LayoutGPT a strong baseline and conceptual ancestor, but not a competing system. We are not doing the same task 
+more accurately — we are doing a different task that LayoutGPT cannot do at all.
+
+## Limitation
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/8-literature-review-note-3/figure-1.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+The paper's failure cases (**Section B.5, Figure 12** of original article, also figure **above**) reveal a pattern: LayoutGPT 
+struggles most with multi-object prompts involving 
+two or more object categories. It tends to generate smaller bounding boxes to fit everything in, which then causes downstream 
+generation failures. In the 3D synthesis case, furniture overlap and out-of-bound placement are the primary failure modes.
+
+For Multi-Agent-XR, the analogous failure mode would be the Scene Agent placing objects without checking collision or spatial 
+coherence against the existing scene. This is precisely why the Verification Agent exists in our pipeline — a dedicated 
+collision/coherence check step that LayoutGPT has no equivalent for. The LayoutGPT failure cases strengthen the motivation 
+for our verification step as a distinct agent role.
+
+## Open Question
+
+**Question:** LayoutGPT uses static in-context exemplars retrieved from a fixed training set. For Multi-Agent-XR's Complex Route, 
+where does the equivalent grounding come from?
+ 
+**Answer:** This is the role of the Memory Agent's two-stage design. The first stage extracts semantic layout from a reference 
+image (our equivalent of the in-context exemplar for room-type spatial structure). The second stage performs delta planning 
+against the current scene JSON (our equivalent of normalization — anchoring predictions to the actual coordinate space of the 
+existing scene, not an abstract one). Together these replace the static exemplar mechanism with a dynamic, scene-aware version.
 
 <style>
 {`
