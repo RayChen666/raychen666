@@ -12,13 +12,42 @@ tag: "Research Meeting"
 
 - To access to the project code, navigate to the [Project Code](https://github.com/RayChen666/Multi-Agent-XR).
 
+- Part of information also takes reference from Saurabh's [meeting note](/documents/meeting-note/saurabh-meeting-note-04-03-26.pdf), Kudos to Saurabh.
+
+- To access SceneGraph study by RPI, navigate to [Scene Graph Generation](https://sites.ecse.rpi.edu/~cvrl/SG/SG.html).
+
 ## Meeting Content
 
-- Research related **Q&A**
+- **Literature review** discussion and extension to vague & complex route design.
 
-- **Literature review** discussion
+- Image input agent design and image input format.
+
+- LLM Hallucination issue and occurrance.
+
+- Graph-based spatial relational data pipeline.
+
+## Complex Route Design update
+
+Extending from the listerature review discussion on LayoutGPT article, we agreed that LayoutGPT is an excellent proof of concept for your JSON 
+based spatial input (for which we already see great results)
+
+However, the goal is to improve the Vague/ Complex route to interpret more accurately. We discussed literature reviews, which referenced novel 
+spatial approaches using LLMs such as LayoutGPT, which says that sometimes a structural written prompt can help LLMs understand layouts much 
+better than image recognition, owing to the fact that purely Transformer based (ViT) models might not be the best at object detection. This 
+in turn becomes a Computer Vision problem, where we would have to explore objection detection, segmentation, semantic object detection etc., 
+which is not in the best interest of our LLM focused research.
 
 ## Image Agent Design
+
+We proposed that we could use reference images of physical spaces such as Ofﬁces, Cafes, and Homes, as input to a separate agent, to help 
+nudge the overall MAS-XR in the right direction. This means, we would have a strong Semantic Analyzer, as opposed to a purely spatial analysis.
+
+**Question:** What is the Semantic approach in this system?
+
+**Answer:** Currently the system has ﬁve Agents, of which four are purely spatial analysts, and while the Language Agent does understand “intent” 
+and “semantics”, it’s purely meant to analyze user command in natural language. That means to solve complex problems such as “turn my 
+bedroom into a minimalist ofﬁce room”, we might need a Semantic Analyst Agent, that tries to understand the intent of the user based 
+on a “aesthetic goal”, (more visually!).
 
 **Question:** How is the memory module / agent process the image and generate the sumantc layout plan for scene and asset agent to 
 understand?
@@ -57,6 +86,47 @@ The current design for thr memory module is like:
 
 This means, we separate step 2, 3, and 4.A to form an image agent, while the memory module import the processing 
 result of the image agent and only do step 1, 4.B, and 5.
+
+## Image based Semantic Analysis
+
+Ray proposed that we can try to add an image into the system, which analyzes the space, such as adding an “OfﬁceView.png”, 
+with a vectorized ﬂoor plan view of all the objects in the scene, such as Sofa, Table, Chair, Desk etc. Saurabh proposed 
+that instead of adding the image to the existing agents, and further adding scope for hallucinations, we make an entirely 
+separate “Image Agent” that analyzes images, along with the user’s intent.
+
+Here are some of the things discussed in this section of the meeting:
+
+- We might have an Image Agent, purely meant for the vague/complex route, that gets fed the “target” scene, such as a 
+Floor Plans of an ofﬁce room/ Coffee Shop/ Bedroom etc.
+
+- The Agent will analyze the various objects in the scene, and the spatial information related to each. E.g. Using a 
+strict JSON format, the Agent might output things like
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+[
+    {
+      "object-name": "sofa",
+      "spatial-info": "sofa is to the right of the chair"
+    },
+    {
+      "object-name": "chair",
+      "spatial-info": "chair is to the left of the sofa"
+    }
+]
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+We also discussed some alternate ways to represent spatial relationships between objects, speciﬁcally things 
+such as Graph Adjacency Lists, and also SceneGraphs.
 
 ## AI Hallucination
 
@@ -97,6 +167,55 @@ but as for this research we're doing HCI stuff so we just resolve the minimum fu
 precision and benchmarking.
 
 ## Graph-Based Data Structure
+
+**Graph Adjacency Lists**
+
+In classic Algorithms, a graph is represented as either an adjacency list or an Adjacency Matrix. Saurabh proposed, an adjacency list is as simple 
+as making all the objects in the scene as “nodes” in the graph, and the adjacency list will have the objects relationship with all other objects 
+(or the one’s closer to it). Refer to following example derived from classic DSA:
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/9-meeting-note-3/adjacency-list.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+In above example, if we represent “0”, “1”, “2”, and “3” with the names for objects in the scene, the adjacency list may be written out in JSON as:
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+[
+    {
+      "object-name": "sofa",
+      "adjacency": [
+        { "neighbor": "chair", "direction": "right", "distance": "1 meter" },
+        { "neighbor": "table", "direction": "left", "distance": "2 meters" }
+      ]
+    },
+    {
+      "object-name": "chair",
+      "adjacency": [
+        { "neighbor": "sofa", "direction": "left", "distance": "1 meter" }
+      ]
+    }
+]
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+**Note:** It is crucial to understand that while the representations are not novel, using an LLM to make decisions based on this structure might be 
+novel. Further literature review studies would shed light on this proposal’s usefulness. It is also important to note that it will also signiﬁcantly 
+increase the LLM Agent Token usage with the Image and Spatial Graph based context input if this Semantic Route is ever implemented.
+
+**Adjacency Lists as Spatial Relation Implementation**
 
 From the [literature review](https://raychen666.vercel.app/blog/8-literature-review-note-3) discussion we identified that the structured-
 representation of spatial information significantly improves the quality of spatial reasoning ability of LLMs. Our original `metadata.json` is 
@@ -251,6 +370,28 @@ Finally the scene agent will resolve by outputing something like:
 We understand that adding this level of data pipeline is a huge amount of engineering work, so primarily we need to do some 
 literature reviews to determine whether there is already some open-source Git repos and publications to talk about this, which is 
 a kind of extension to last literature review.
+
+**SceneGraph**
+
+Due to Saurabh’s entry level experience with game engines, he proposed another way to represent the object hierarchy. A scene 
+graph is a hierarchical tree data structure used in 3D engines and graphics software (like Unity or Open 3D Engine) to organize 
+graphical scenes. Attached are some images that may help us understand SceneGraphs as a possible representation for our objects.
+
+Read the study here for more info made by RPI: ➔ [Scene Graph Generation](https://sites.ecse.rpi.edu/~cvrl/SG/SG.html)
+
+The study showed an example which might help us understand how SceneGraphs work (firgure below shows an image with different 
+objects and its scene Graph):
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/9-meeting-note-3/sgg_intro_org.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+**Limitations:** Our scene might not have objects having a strict hierarchical relationship, so we would have to explore the feasibility 
+(which means further literature review should be done and discuessed) of SceneGraphs in this projects.
 
 ## Task list
 
