@@ -26,7 +26,7 @@ tag: "Literature Review"
 4. ICRA 2024 Conference paper: 
 [Translating Universal Scene Descriptions into Knowledge Graphs for Robotic Environment](https://arxiv.org/abs/2310.16737)
 
-## Summary
+## Intro
 
 From the [meeting](https://raychen666.vercel.app/blog/9-meeting-note-3#graph-based-data-structure) on 
 04/03/26 we identified that for the LLM to better understand the spatial relationships among objects it would be 
@@ -133,6 +133,27 @@ relations) but not *semantically typed* — we don't classify objects into ontol
 suggests that adding even simple type hierarchies (e.g., `furniture/surface`, `furniture/seating`, `decor/lighting`) would enable 
 more principled placement queries. Notably, this echoes the `spatial_relationships.preferred_anchors` fields we've been sketching 
 into the extended `metadata.json` — those type-based placement rules are a lightweight ontological layer by another name. 
+
+## Summary
+
+All 4 articles contribute to our theory and implementation of the memory & image agent module from different aspects: 
+
+- The first article, 
+talking about the Dynamic Scene Graph, sets the theoretical foundation for the reason why we need to design the scene graph in this way. 
+It argues that the adjacency list really helps with the planning and decision-making of the scene layout. 
+
+- The second article gives the data support for why it is important for us to design scene graph with spatial relationships as edges while 
+objects as nodes and anchor - it can increase the understanding 
+of LLMs to the 3D scene and do more precise manipulation.
+
+- The third article gives hints on how do we define the vocabularies of `spatial_relationships` for the unity of the prompt for LLMs to 
+understand and parse.
+
+- The last article draws attention to semantic typing of scene nodes — categorizing assets into ontological types to enable more 
+principled spatial queries. For our prototyping, we won't implement a full type hierarchy at this stage, but this is worth investigating 
+in comparative user studies to test whether richer asset categorization increases the precision and cohesion of layout placement.
+
+
 
 
 
