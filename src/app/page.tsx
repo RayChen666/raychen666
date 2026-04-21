@@ -292,7 +292,7 @@ export default function Home() {
 
       <RevealFx translateY="16" delay={0.6} fillWidth>
         <FeaturedProject
-          keywords="2026 | Multi-Agent System | HCI | VR"
+          keywords="2026 | Multi-Agent System | HCI | XR"
           title="XR-MultiAgent"
           //subtitle="The first system to explore collaborative agentic spatial intelligence in XR world"
           description="A real-time multi-agent system that translates natural language into spatially 
@@ -300,7 +300,7 @@ export default function Home() {
           images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
           videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
           projectUrl="/work/multi-agent-xr"
-          codeUrl="https://github.com/RayChen666/Multi-Agent-XR"
+          //codeUrl="https://github.com/RayChen666/Multi-Agent-XR"
         />
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>
