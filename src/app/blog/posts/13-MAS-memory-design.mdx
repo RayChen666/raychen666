@@ -6,11 +6,169 @@ publishedAt: "2026-04-21"
 tag: "System Design"
 ---
 
-Not updated yet, please checkout other posts.
+## Summary
 
+This blog post introduces how in the memory module, data is being processed, 
+and also some of the limitations which needs further development. Before the release of the system for the 
+user study, all **engineering features and bugs** must be solved, all **edge cases** needs to be discovered and resolved, a 
+**comparative system** doing the same task might also be established.
 
+## Pipeline
 
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/13-MAS-memory-design/complex-route-design.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
 
+The above image shows how the data is being passed to each module, and below shows exactly how data being transferred.
+
+**Step 1 - LanguageAgent parses intent**
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+User: "create an office in this blank space"
+         ↓
+LanguageAgent → parsed_command:
+{
+  command_type: "Vague/Complex",
+  involved_objects: [],          ← empty, unknown yet
+  intent_summary: "Furnish an empty space as a functional office",
+  action_hints: { primary_action: "arrange" }
+}
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+**Step 2 -  Router sends to Memory node**
+
+LangGraph `_route_command` sees `"Vague/Complex"` → routes to `_memory_node`
+
+**Step 3 — MemoryAgent.process() begins**
+
+3a. Detect target room type: Keyword matching against `REFERENCE_IMAGE_LIBRARY`:
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+REFERENCE_IMAGE_LIBRARY = {
+    "office":      "reference_layouts/office.jpg",
+    "bedroom":     "reference_layouts/bedroom.jpg",
+    "living room": "reference_layouts/living_room.jpg",
+    ...
+}
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+3b. Get room dimensions from scene_state
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+bounds = scene_state["metadata"]["bounds"]
+# min: {x:-1, y:-1, z:-2.5}
+# max: {x:1,  y:0.5, z:-0.5}
+room_dims = {x: 2.0, y: 1.5, z: 2.0}
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+**Step 4 — ImageAgent extracts semantic layout**
+
+<CodeBlock
+  marginBottom="16"
+  style={{ borderRadius: '20px' }}
+  codes={[
+    {
+      code: `
+{
+  "anchor_object": "desk",
+  "anchor_placement": "center",
+  "layout_graph": {
+    "nodes": ["sofa", "desk", "office_chair", "cabinet", "cabinet",
+              "back_wall", "front_wall", "left_wall", "right_wall"],
+    "edges": [
+      {"from": "sofa", "to": "left_wall", "relation": "next_to", "side": "west"},
+      {"from": "sofa", "to": "desk", "relation": "facing", "side": "east"},
+      {"from": "desk", "to": "back_wall", "relation": "close_to", "side": "north"},
+      {"from": "office_chair", "to": "desk", "relation": "facing", "side": "west"},
+      {"from": "cabinet", "to": "front_wall", "relation": "at_corner", "corner": "front_left"},
+      {"from": "cabinet", "to": "right_wall", "relation": "next_to", "side": "east"}
+    ]
+  }
+}
+`,
+      language: "JSON",
+      label: "JSON"
+    }
+  ]}
+/>
+
+**Step 5 - Pass sceneGraph generated to asset and scene agent**
+
+## Limitation 
+
+Current setup is a "one-shot" command route, which means that it can only generate from rubric 
+(like an empty space). This means that it is not scalable to other types of commands like "change the current 
+scene to a new setup". In this cases, requires the system to scan through obejects with in the existing scene and 
+detect which does not belong to the new scene user wants to create. To explain, when user say "change the 
+current bedroom layout to an office", then if there is a bed in the bedroom, then the system should 
+perform "smart delete" (but this seems to fall into AI field). 
+
+Another approach, which is more straightforward, is when user requires changing the room style, the system 
+first perform "multi-object delete", whihc deletes all items in the exisiting scene and create a new scene 
+from scratch. 
+
+Or, the most complex way, instead of multi-agent system being completely reactive to human's command, 
+adding a communication dislogue chatBot to discuess with human on how to perform the layout arrangement and scene 
+update, but this is more innovative for sure, which means we divide the system into 2 modes, the reactive 
+and proactive modes.
+
+## Real-World Physics
+
+For the verification step, instead of building bounding box data pipeline and an agent to check with various 
+iterations being performed, another method worth thinking is to add a web/javascript-based **physical engine** to 
+perform the collision detection.
+
+Basically it is doing the similar job but with well-developed open-sourced framework. This will save a lot of 
+time of delopment work, and time for our system to process user command will be significantly reduced. Since there is no 
+cases for agents to "iterate back", but this is just an assumption worth discussion.
+
+## Issues Remaining
+
+I tested with headset on the newly added features to the system. Several issues identified:
+
+- STT feature only works in laptop browser, the browser in headset does not support **Web API** like Chrome.
+
+- Sometimes AI hallucinates. For example in one command, I said: "add an entertainment machine and put it on the left side 
+of the desk", the system, though correctly added a hackney table, put it to the right side of the desk, but this only 
+happens in roughly 1/10 command prompts.
+
+- Objects crush into each other, need to develop verification agent or add physical/game engine.
+
+- There is only single-object-delete at this time. Need to add multi-object-delete feature.
 
 <style>
 {`
