@@ -156,8 +156,8 @@ export function BlogSearch() {
         >
           {showShine && (
             <ShineBorder
-              shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
-              //shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
+              //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+              shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
               duration={6}
               borderWidth={0.6}
             />
@@ -170,7 +170,7 @@ export function BlogSearch() {
               gap: "10px",
               width: "100%",
               padding: "12px 20px",
-              background: "var(--brand-alpha-weak)",
+              background: isHovered ? "var(--neutral-alpha-weak)" : "var(--brand-alpha-weak)",
               border: "1px solid var(--neutral-alpha-weak)",
               borderRadius: "var(--radius-l)",
               cursor: "pointer",
@@ -260,9 +260,21 @@ export function BlogSearch() {
                 </span>
                 {" "}
                 <span 
-                  style={{ position: "relative", bottom: "3.3px" }}
+                  style={{ position: "relative", 
+                  bottom: "3.3px",
+                }}
                 >
-                  Ask AI · Gemini
+                  Ask AI{" "}
+                </span>
+                <span 
+                  style={{ 
+                    position: "relative", 
+                    bottom: "3.3px",
+                    fontSize: "12px",
+                    color: "#5ba3c9"
+                   }}
+                >
+                   powered by gemini-2.5-flash
                 </span>
               </span>
               <button
