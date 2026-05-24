@@ -159,7 +159,7 @@ export function BlogSearch() {
               //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
               shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
               duration={6}
-              borderWidth={0.6}
+              borderWidth={0.8}
             />
           )}
           <button
