@@ -21,6 +21,7 @@ interface FeaturedProjectProps {
   videoUrl: string;
   projectUrl: string;
   codeUrl?: string;
+  paperUrl?: string;
 }
 
 export function FeaturedProject({ 
@@ -31,7 +32,8 @@ export function FeaturedProject({
   images,
   videoUrl,
   projectUrl, 
-  codeUrl 
+  codeUrl,
+  paperUrl, 
 }: FeaturedProjectProps) {
   
   return (
@@ -116,11 +118,20 @@ export function FeaturedProject({
             </SmartLink>
             {codeUrl && (
               <SmartLink
-                suffixIcon="arrowUpRightFromSquare"
+                suffixIcon="code"
                 style={{ margin: "0", width: "fit-content" }}
                 href={codeUrl}
               >
                 <Text variant="body-default-s">Project code</Text>
+              </SmartLink>
+            )}
+            {paperUrl && (
+              <SmartLink
+                suffixIcon="arrowUpRightFromSquare"
+                style={{ margin: "0", width: "fit-content" }}
+                href={paperUrl}
+              >
+                <Text variant="body-default-s">Paper Link</Text>
               </SmartLink>
             )}
           </Flex>

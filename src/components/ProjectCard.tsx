@@ -24,6 +24,7 @@ interface ProjectCardProps {
   link: string;
   keywords?: string;
   subtitle?: string;
+  paperLink?: string;  // optional
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -36,6 +37,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
   keywords,
   subtitle,
+  paperLink,
 }) => {
   return (
     <Column fillWidth gap="m">
@@ -90,11 +92,20 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               )}
               {link && (
                 <SmartLink
-                  suffixIcon="arrowUpRightFromSquare"
+                  suffixIcon="code"
                   style={{ margin: "0", width: "fit-content" }}
                   href={link}
                 >
                   <Text variant="body-default-s">Project code</Text>
+                </SmartLink>
+              )}
+              {paperLink && (
+                <SmartLink
+                  suffixIcon="arrowUpRightFromSquare"
+                  style={{ margin: "0", width: "fit-content" }}
+                  href={paperLink}
+                >
+                  <Text variant="body-default-s">Paper Link</Text>
                 </SmartLink>
               )}
             </Flex>

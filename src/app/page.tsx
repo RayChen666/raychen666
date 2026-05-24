@@ -314,6 +314,7 @@ export default function Home() {
           videoUrl="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4"
           projectUrl="/work/xr-swarm-drone-control"
           codeUrl="https://github.com/RayChen666/XR-Swarm-Drone-Control"
+          paperUrl="https://arxiv.org/abs/2605.21680"
         />
       </RevealFx>
       <RevealFx translateY="16" delay={0.6} fillWidth>

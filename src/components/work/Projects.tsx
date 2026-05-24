@@ -38,6 +38,7 @@ export function Projects({ range, exclude }: ProjectsProps) {
           link={post.metadata.link || ""}
           keywords={post.metadata.keywords || ""}
           subtitle={post.metadata.subtitle || ""}
+          paperLink={post.metadata.paperLink || ""}
         />
       ))}
     </Column>

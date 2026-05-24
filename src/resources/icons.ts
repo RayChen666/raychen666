@@ -5,6 +5,7 @@ import {
   FaFilePdf,
   FaFile,
   FaRedditAlien,
+  FaCode,
 } from "react-icons/fa6";
 
 import { 
@@ -60,6 +61,7 @@ import {
   SiGooglemeet,
   SiPostman,
   SiJira,
+  SiArxiv,
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
@@ -122,7 +124,8 @@ export const iconLibrary: Record<string, IconType> = {
   reddit: FaRedditAlien,
   telegram: FaTelegram,
   instagram: FaInstagram,
-  
+  code: FaCode,
+  arxiv: SiArxiv,
 };
 
 export type IconLibrary = typeof iconLibrary;
