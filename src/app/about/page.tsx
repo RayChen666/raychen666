@@ -189,51 +189,7 @@ export default function About() {
                 
               </Row>
             )}
-            {/*
-             {about.calendar.display && (
-                <Row
-                  fitWidth
-                  border="brand-alpha-medium"
-                  background="brand-alpha-weak"
-                  radius="full"
-                  padding="0"
-                  gap="4"
-                  marginBottom="m"
-                  vertical="center"
-                  className={styles.blockAlign}
-                  
-                  style={{
-                    backdropFilter: "blur(var(--static-space-1))",
-                    
-                  }}
-                   >
-                  <Icon 
-                    paddingLeft="8" 
-                    name="googleMeet" 
-                    //onBackground="brand-weak" 
-                    size="xs"
-                  />
-                  <Row paddingLeft="4">
-                    <Text 
-                    variant="label-default-s" 
-                      //onBackground="brand-weak" 
-                    >
-                      Book a Meeting
-                      
-                    </Text>
-                  </Row>
-                  <IconButton
-                    href={about.calendar.link}
-                    data-border="rounded"
-                    variant="secondary"
-                    icon="chevronRight"
-                    size="s"
-                    
-                    style={{ height: "30px", width: "30px", minHeight: "unset"}}
-                  />
-                </Row>
-              )}
-              */}
+
               {about.calendar.display && (
               <>
                 {/* Desktop: small pill button */}

@@ -105,7 +105,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={{ margin: "0", width: "fit-content" }}
                   href={paperLink}
                 >
-                  <Text variant="body-default-s">Paper Link</Text>
+                  <Text variant="body-default-s">Paper link</Text>
                 </SmartLink>
               )}
             </Flex>

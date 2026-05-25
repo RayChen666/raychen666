@@ -54,6 +54,12 @@ const social: Social = [
     name: "Email",
     icon: "mail",
     link: `mailto:${person.email}`,
+    essential: false,
+  },
+  {
+    name: "Google Scholar",
+    icon: "googlescholar",
+    link: `https://scholar.google.com/citations?user=X7jFKtQAAAAJ`,
     essential: true,
   },
   {

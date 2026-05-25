@@ -131,7 +131,7 @@ export function FeaturedProject({
                 style={{ margin: "0", width: "fit-content" }}
                 href={paperUrl}
               >
-                <Text variant="body-default-s">Paper Link</Text>
+                <Text variant="body-default-s">Paper link</Text>
               </SmartLink>
             )}
           </Flex>

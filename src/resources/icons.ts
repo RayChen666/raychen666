@@ -5,7 +5,7 @@ import {
   FaFilePdf,
   FaFile,
   FaRedditAlien,
-  FaCode,
+  FaGoogleScholar,
 } from "react-icons/fa6";
 
 import { 
@@ -19,6 +19,8 @@ import {
 
 import { GrMysql } from "react-icons/gr";
 
+import { HiOutlineCode } from "react-icons/hi";
+
 import {
   HiArrowUpRight,
   HiOutlineLink,
@@ -31,6 +33,8 @@ import {
   HiOutlineDocument,
   HiOutlineGlobeAsiaAustralia,
   HiOutlineRocketLaunch,
+  HiOutlineCodeBracket,
+  HiMiniCodeBracket,
 } from "react-icons/hi2";
 
 import {
@@ -124,8 +128,9 @@ export const iconLibrary: Record<string, IconType> = {
   reddit: FaRedditAlien,
   telegram: FaTelegram,
   instagram: FaInstagram,
-  code: FaCode,
+  code: HiMiniCodeBracket,
   arxiv: SiArxiv,
+  googlescholar: FaGoogleScholar,
 };
 
 export type IconLibrary = typeof iconLibrary;
