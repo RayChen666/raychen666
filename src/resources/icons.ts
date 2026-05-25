@@ -6,6 +6,7 @@ import {
   FaFile,
   FaRedditAlien,
   FaGoogleScholar,
+  FaRegFaceMeh,
 } from "react-icons/fa6";
 
 import { 
@@ -19,7 +20,6 @@ import {
 
 import { GrMysql } from "react-icons/gr";
 
-import { HiOutlineCode } from "react-icons/hi";
 
 import {
   HiArrowUpRight,
@@ -43,7 +43,26 @@ import {
   PiGridFourDuotone,
   PiBookBookmarkDuotone,
   PiImageDuotone,
+  PiSmileyMehDuotone,
 } from "react-icons/pi";
+
+import { 
+  FcBusinessman,
+  FcCustomerSupport,
+  FcCircuit,
+  FcBookmark,
+  FcDepartment,
+  FcChargeBattery,
+  FcCloseUpMode,
+  FcShop,
+  FcManager,
+  FcMindMap,
+  FcFlowChart,
+  FcOrgUnit,
+  FcHome,
+  FcNightLandscape,
+  FcLandscape,
+ } from "react-icons/fc";
 
 import {
   SiJavascript,
@@ -131,6 +150,13 @@ export const iconLibrary: Record<string, IconType> = {
   code: HiMiniCodeBracket,
   arxiv: SiArxiv,
   googlescholar: FaGoogleScholar,
+  face: PiSmileyMehDuotone,
+  face2: FcManager,
+  grid2: FcOrgUnit,
+  book2: FcBookmark,
+  home2: FcHome,
+  dark2: FcNightLandscape,
+  light2: FcLandscape,
 };
 
 export type IconLibrary = typeof iconLibrary;

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Row, ToggleButton, useTheme } from "@once-ui-system/core";
 
-export const ThemeToggle: React.FC = () => {
+export const ThemeToggle: React.FC<{ variant?: "default" | "filled" }> = ({ variant = "default" }) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [currentTheme, setCurrentTheme] = useState("light");
@@ -17,7 +17,10 @@ export const ThemeToggle: React.FC = () => {
     setCurrentTheme(document.documentElement.getAttribute("data-theme") || "light");
   }, [theme]);
 
-  const icon = currentTheme === "dark" ? "light" : "dark";
+  const icon = currentTheme === "dark"
+    ? (variant === "filled" ? "light2" : "light")
+    : (variant === "filled" ? "dark2" : "dark");
+
   const nextTheme = currentTheme === "light" ? "dark" : "light";
 
   return (

@@ -97,14 +97,29 @@ export const Header = () => {
             />
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+                <>
+                <Row s={{ hide: true }}>
+                  <ToggleButton 
+                    prefixIcon="home2" 
+                    href="/" 
+                    selected={pathname === "/"} 
+                  />
+                </Row>
+                <Row s={{ hide: false}}>
+                <ToggleButton 
+                  prefixIcon="home" 
+                  href="/" 
+                  selected={pathname === "/"} 
+                />
+                </Row>
+                </>
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
-                      prefixIcon="person"
+                      prefixIcon="face2"
                       href="/about"
                       label={about.label}
                       selected={pathname === "/about"}
@@ -112,7 +127,7 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
-                      prefixIcon="person"
+                      prefixIcon="face"
                       href="/about"
                       selected={pathname === "/about"}
                     />
@@ -123,7 +138,7 @@ export const Header = () => {
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
-                      prefixIcon="grid"
+                      prefixIcon="grid2"
                       href="/work"
                       label={work.label}
                       selected={pathname.startsWith("/work")}
@@ -142,7 +157,7 @@ export const Header = () => {
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
-                      prefixIcon="book"
+                      prefixIcon="book2"
                       href="/blog"
                       label={blog.label}
                       selected={pathname.startsWith("/blog")}
@@ -179,7 +194,12 @@ export const Header = () => {
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <ThemeToggle />
+                    <Row s={{ hide: true }}>
+                      <ThemeToggle variant="filled" />   {/* desktop: dark2/light2 */}
+                    </Row>
+                    <Row hide s={{ hide: false }}>
+                      <ThemeToggle />                    {/* mobile: dark/light */}
+                    </Row>
                 </>
               )}
             </Row>
