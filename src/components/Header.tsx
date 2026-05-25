@@ -85,11 +85,11 @@ export const Header = () => {
             //border="neutral-alpha-weak"
             s={{ hide: false }}
             radius="m-4"
-            shadow="xl"
+            shadow="l"
             padding="4"
             horizontal="center"
             zIndex={1}
-            border="neutral-alpha-medium"
+            border="neutral-alpha-weak"
           >
             {/*<ShineBorder
               //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
@@ -209,11 +209,11 @@ export const Header = () => {
           <Row
             s={{ hide: true }}
             radius="m-4"
-            shadow="xl"
+            shadow="l"
             padding="4"
             horizontal="center"
             zIndex={1}
-            border="neutral-alpha-medium"
+            border="neutral-alpha-weak"
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
