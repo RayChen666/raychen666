@@ -89,13 +89,14 @@ export const Header = () => {
             padding="4"
             horizontal="center"
             zIndex={1}
+            border="neutral-alpha-medium"
           >
-            <ShineBorder
+            {/*<ShineBorder
               //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
               shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
               duration={6}
               borderWidth={0.6}
-            />
+            />*/}
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
                 <>
@@ -212,6 +213,7 @@ export const Header = () => {
             padding="4"
             horizontal="center"
             zIndex={1}
+            border="neutral-alpha-medium"
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (

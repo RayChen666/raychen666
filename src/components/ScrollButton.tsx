@@ -68,11 +68,11 @@ export function ScrollButton() {
         height: 'var(--static-space-40)',
       }}
     >
-      <ShineBorder
+      {/*<ShineBorder
         shineColor={['#5ba3c9', '#ffffff', '#5ba3c9']}
         duration={6}
         borderWidth={0.6}
-      />
+      />*/}
       <IconButton
         onClick={handleClick}
         data-border="rounded"
@@ -84,6 +84,8 @@ export function ScrollButton() {
           width: 'var(--static-space-40)',
           minHeight: 'unset',
           minWidth: 'unset',
+          border: 'none',        // ← add this
+          outline: 'none', 
         }}
       />
     </div>
