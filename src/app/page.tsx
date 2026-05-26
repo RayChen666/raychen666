@@ -324,7 +324,7 @@ export default function Home() {
           //subtitle="An Augmented Reality Drone Control Simulator"
           description= "A full-stack AR drone teleoperation system enabling real-time spatial control and low-latency streaming to a physical drone."
           images={["/images/projects/project-01/arTelloSimulator-cover-image.jpg"]}
-          videoUrl="/images/projects/project-01/arTelloSimulator-Demo-Video.mp4"
+          youtubeUrl="https://www.youtube.com/embed/ERtzd-qVtxw"
           projectUrl="/work/ar-tello-simulator"
           codeUrl="https://github.com/RayChen666/AR-Tello-Simulator"
         />

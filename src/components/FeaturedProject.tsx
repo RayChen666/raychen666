@@ -18,7 +18,8 @@ interface FeaturedProjectProps {
   description: string;
   keywords: string;
   images: string[];
-  videoUrl: string;
+  videoUrl?: string;
+  youtubeUrl?: string; 
   projectUrl: string;
   codeUrl?: string;
   paperUrl?: string;
@@ -34,6 +35,7 @@ export function FeaturedProject({
   projectUrl, 
   codeUrl,
   paperUrl, 
+  youtubeUrl,
 }: FeaturedProjectProps) {
   
   return (
@@ -52,17 +54,30 @@ export function FeaturedProject({
 
         {/* Right: Video */}
         <Column flex={1}>
-          <video 
-            controls 
-            width="100%" 
-            style={{ 
-              borderRadius: '20px',
-              aspectRatio: '16/9',
-              objectFit: 'cover',
-            }}
-          >
-            <source src={videoUrl} type="video/mp4" />
-          </video>
+          {youtubeUrl ? (
+            <iframe
+              width="100%"
+              style={{
+                borderRadius: '20px',
+                aspectRatio: '16/9',
+                border: 'none',
+              }}
+              src={youtubeUrl}
+              allowFullScreen
+            />
+          ) : (
+            <video
+              controls
+              width="100%"
+              style={{
+                borderRadius: '20px',
+                aspectRatio: '16/9',
+                objectFit: 'cover',
+              }}
+            >
+              <source src={videoUrl} type="video/mp4" />
+            </video>
+          )}
         </Column>
       </Row>
 
