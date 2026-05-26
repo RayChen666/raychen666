@@ -18,8 +18,8 @@ export const ThemeToggle: React.FC<{ variant?: "default" | "filled" }> = ({ vari
   }, [theme]);
 
   const icon = currentTheme === "dark"
-    ? (variant === "filled" ? "light2" : "light")
-    : (variant === "filled" ? "dark2" : "dark");
+    ? (variant === "filled" ? "light2" : "light1")
+    : (variant === "filled" ? "dark2" : "dark1");
 
   const nextTheme = currentTheme === "light" ? "dark" : "light";
 

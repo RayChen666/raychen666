@@ -1,13 +1,6 @@
 import { IconType } from "react-icons";
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
 import { AiFillMail} from "react-icons/ai";
-import { 
-  FaFilePdf,
-  FaFile,
-  FaRedditAlien,
-  FaGoogleScholar,
-  FaRegFaceMeh,
-} from "react-icons/fa6";
 
 import { 
   FaNodeJs,
@@ -44,6 +37,8 @@ import {
   PiBookBookmarkDuotone,
   PiImageDuotone,
   PiSmileyMehDuotone,
+  PiMoonDuotone,
+  PiSunDuotone,
 } from "react-icons/pi";
 
 import { 
@@ -87,7 +82,25 @@ import {
   SiArxiv,
 } from "react-icons/si";
 
-import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
+import { 
+  FaDiscord, 
+  FaGithub, 
+  FaLinkedin, 
+  FaX, 
+  FaThreads, 
+  FaInstagram, 
+  FaXTwitter, 
+  FaFacebook, 
+  FaPinterest, 
+  FaWhatsapp, 
+  FaReddit, 
+  FaTelegram, 
+  FaFilePdf,
+  FaFile,
+  FaRedditAlien,
+  FaGoogleScholar,
+  FaRegFaceMeh,
+} from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
   arrowUpRight: HiArrowUpRight,
@@ -156,7 +169,9 @@ export const iconLibrary: Record<string, IconType> = {
   book2: FcBookmark,
   home2: FcHome,
   dark2: FcNightLandscape,
+  dark1: PiMoonDuotone,
   light2: FcLandscape,
+  light1: PiSunDuotone,
 };
 
 export type IconLibrary = typeof iconLibrary;
