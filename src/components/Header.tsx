@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ShineBorder } from "@/components/ShineBorder";
 import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { routes, display, person, about, blog, work, gallery, playground } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
@@ -193,6 +193,25 @@ export const Header = () => {
                   </Row>
                 </>
               )}
+              {routes["/playground"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="playground2"
+                      href="/playground"
+                      label={playground.label}
+                      selected={pathname.startsWith("/playground")}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="playground"
+                      href="/playground"
+                      selected={pathname.startsWith("/playground")}
+                    />
+                  </Row>
+                </>
+              )}
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
@@ -307,6 +326,25 @@ export const Header = () => {
                       prefixIcon="gallery"
                       href="/gallery"
                       selected={pathname.startsWith("/gallery")}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/playground"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="playground2"
+                      href="/playground"
+                      label={playground.label}
+                      selected={pathname.startsWith("/playground")}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="playground"
+                      href="/playground"
+                      selected={pathname.startsWith("/playground")}
                     />
                   </Row>
                 </>

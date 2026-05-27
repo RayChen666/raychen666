@@ -238,3 +238,8 @@ export interface Gallery extends BasePageConfig {
     orientation: string;
   }>;
 }
+
+/**
+ * Playground page configuration.
+ */
+export interface Playground extends BasePageConfig {}
