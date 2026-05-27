@@ -298,7 +298,7 @@ export default function Home() {
           description="A real-time multi-agent system that translates natural language into spatially 
           coordinated XR scene creation and manipulation."
           images={["/images/projects/project-01/multiagentxr-cover-image.jpg"]}
-          videoUrl="/images/projects/project-01/multiagentxr-Demo-Video.mp4"
+          youtubeUrl="https://www.youtube.com/embed/O8bNaBdax30"
           projectUrl="/work/multi-agent-xr"
           //codeUrl="https://github.com/RayChen666/Multi-Agent-XR"
         />
@@ -311,7 +311,7 @@ export default function Home() {
           description="Built a WebXR interface and WebSocket communication layer for multi-sensor drone 
           swarm control, published at IEEE ICRA 2026."
           images={["/images/projects/project-01/xrSwarmDroneControl-cover-image.jpg"]}
-          videoUrl="/images/projects/project-01/xrSwarmDroneControl-Demo-Video.mp4"
+          youtubeUrl="https://www.youtube.com/embed/o2iKKrLNM7g"
           projectUrl="/work/xr-swarm-drone-control"
           codeUrl="https://github.com/RayChen666/XR-Swarm-Drone-Control"
           paperUrl="https://arxiv.org/abs/2605.21680"
@@ -337,7 +337,7 @@ export default function Home() {
           description="A real-time computer vision pipeline enabling gesture-based control of a DJI Tello 
           drone using hand tracking with webcam."
           images={["/images/projects/project-01/handgestureTello-cover-image.jpg"]}
-          videoUrl="/images/projects/project-01/handgestureTello-Demo-Video.mp4"
+          youtubeUrl="https://www.youtube.com/embed/h6DKgtTVJVA"
           projectUrl="/work/hand-gesture-dji-tello"
           codeUrl="https://github.com/RayChen666/HandGestureDJITello"
         />
