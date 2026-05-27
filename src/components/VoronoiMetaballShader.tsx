@@ -66,9 +66,9 @@ void main() {
     d = nd;
   }
 
-  vec3 colA = vec3(0.357, 0.639, 0.788); // #5ba3c9
+  vec3 colA = vec3(0.0, 0.0, 0.0);
   vec3 colB = vec3(0.576, 0.910, 0.988); // #67e8f9
-  gl_FragColor = vec4(mix(colA, colB, clamp(kd * 0.15, 0.0, 1.0)), 1.0);
+  gl_FragColor = vec4(mix(colB, colA, clamp(kd * 0.10, 0.0, 1.0)), 1.0);
 }
 `
 

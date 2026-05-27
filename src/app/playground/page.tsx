@@ -27,7 +27,7 @@ export default function Playground() {
   return (
     <>
     <div style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
-        <VoronoiMetaballShader opacity={0.45} />
+        <VoronoiMetaballShader opacity={0.25} />
       </div>
     <Column
       //maxWidth="m"
