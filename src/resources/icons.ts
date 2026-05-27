@@ -13,6 +13,8 @@ import {
 
 import { GrMysql } from "react-icons/gr";
 
+import { LiaGoogle } from "react-icons/lia";
+
 
 import {
   HiArrowUpRight,

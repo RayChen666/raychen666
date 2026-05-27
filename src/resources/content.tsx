@@ -59,7 +59,7 @@ const social: Social = [
   {
     name: "Google Scholar",
     icon: "googlescholar",
-    link: `https://scholar.google.com/citations?user=X7jFKtQAAAAJ`,
+    link: `https://scholar.google.com/citations?user=X7jFKtQAAAAJ&hl=en&oi=ao`,
     essential: true,
   },
   {
