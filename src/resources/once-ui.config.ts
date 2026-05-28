@@ -104,7 +104,8 @@ const dataStyle: DataStyleConfig = {
 
 const effects: EffectsConfig = {
   mask: {
-    cursor: true,
+    //cursor: true,
+    cursor: false,
     x: 50,
     y: 0,
     radius: 100,
@@ -121,7 +122,7 @@ const effects: EffectsConfig = {
     colorEnd: "page-background",
   },
   dots: {
-    display: true,
+    display: false,
     opacity: 40,
     size: "2",
     color: "brand-background-strong",
