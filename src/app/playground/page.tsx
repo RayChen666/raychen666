@@ -108,7 +108,7 @@ export default function Playground() {
                         WebkitTextStroke: '0.25px #000000'
                       }}
                     >
-                    Something's brewing here. Stay tuned!
+                    Something's brewing here. Check back soon!
                     </AuroraText>
                   </Text>
       </Column>
