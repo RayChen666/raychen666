@@ -61,6 +61,7 @@ import {
   FcNightLandscape,
   FcLandscape,
   FcPuzzle,
+  FcStackOfPhotos,
  } from "react-icons/fc";
 
 import {
@@ -105,7 +106,7 @@ import {
   FaGoogleScholar,
   FaRegFaceMeh,
 } from "react-icons/fa6";
-import { playground } from "./content";
+import { gallery, playground } from "./content";
 
 export const iconLibrary: Record<string, IconType> = {
   arrowUpRight: HiArrowUpRight,
@@ -179,6 +180,7 @@ export const iconLibrary: Record<string, IconType> = {
   light1: PiSunDuotone,
   playground: PiGameControllerDuotone,
   playground2: FcPuzzle,
+  gallery2: FcStackOfPhotos,
 };
 
 export type IconLibrary = typeof iconLibrary;
