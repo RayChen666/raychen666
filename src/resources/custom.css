@@ -30,6 +30,10 @@ article h2 {
     width: 100% !important;
   }
 }
+
+.post-card:hover {
+  background: var(--brand-alpha-medium) !important;
+}
 /* :root {
   /*
   /* Override default variables here */

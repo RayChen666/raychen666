@@ -154,14 +154,14 @@ export function BlogSearch() {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {showShine && (
+          {/*{showShine && (
             <ShineBorder
               shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
               //shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
               duration={6}
               borderWidth={0.8}
             />
-          )}
+          )}*/}
           <button
             onClick={handleOpen}
             style={{
@@ -170,7 +170,7 @@ export function BlogSearch() {
               gap: "10px",
               width: "100%",
               padding: "12px 20px",
-              background: isHovered ? "var(--neutral-alpha-weak)" : "var(--brand-alpha-weak)",
+              background: isHovered ? "var(--brand-alpha-medium)" : "var(--neutral-alpha-weak)",
               border: "1px solid var(--neutral-alpha-weak)",
               borderRadius: "var(--radius-l)",
               cursor: "pointer",
@@ -211,8 +211,8 @@ export function BlogSearch() {
         >
           {/* ShineBorder always visible while panel is open */}
           <ShineBorder
-            shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
-            //shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
+            //shineColor={["#5ba3c9", "#ffffff", "#5ba3c9"]}
+            shineColor={["#ff0000", "#ff7700", "#ffff00", "#00ff00", "#0000ff", "#8b00ff"]}
             duration={6}
             borderWidth={0.8}
           />
@@ -220,7 +220,7 @@ export function BlogSearch() {
           <div
             style={{
               width: "100%",
-              background: "var(--brand-alpha-weak)",
+              background: "var(--neutral-alpha-weak)",
               border: "1px solid var(--neutral-alpha-medium)",
               borderRadius: "var(--radius-l)",
               overflow: "hidden",
@@ -271,7 +271,7 @@ export function BlogSearch() {
                     position: "relative", 
                     bottom: "3.3px",
                     fontSize: "12px",
-                    color: "#5ba3c9"
+                    color: "var(--neutral-alpha-strong)"
                    }}
                 >
                    powered by gemini-2.5-flash
@@ -406,7 +406,7 @@ export function BlogSearch() {
                 onMouseEnter={() => setIsAskHovered(true)}
                 onMouseLeave={() => setIsAskHovered(false)}
                 style={{
-                  background: isAskHovered ? "var(--brand-alpha-medium)" : "var(--brand-alpha-weak)",
+                  background: isAskHovered ? "var(--brand-alpha-strong)" : "var(--brand-alpha-medium)",
                   border:  isAskHovered ? "1px solid var(--brand-neutral-strong)" : "1px solid var(--brand-alpha-medium)",
                   padding: "0",
                   width: "32px",

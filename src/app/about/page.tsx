@@ -195,8 +195,8 @@ export default function About() {
                 {/* Desktop: small pill button */}
                 <Row s={{ hide: true }}
                   fitWidth
-                  border="neutral-alpha-medium"
-                  background="brand-alpha-weak"
+                  border="neutral-medium"
+                  background="brand-weak"
                   radius="full"
                   padding="0"
                   gap="4"
@@ -217,7 +217,7 @@ export default function About() {
                     size="s"
                     style={{ height: "30px", width: "30px", 
                       minHeight: "unset",
-                      border: '1.0px solid var(--brand-alpha-strong)',
+                      border: '1.0px solid var(--neutral-strong)',
                     }}
                   />
                 </Row>
@@ -226,8 +226,8 @@ export default function About() {
                 <Row hide s={{ hide: false }} marginBottom="m" className={styles.blockAlign}>
                   <Row
                     fitWidth
-                    border="neutral-alpha-medium"
-                    background="brand-alpha-weak"
+                    border="neutral-medium"
+                    background="brand-weak"
                     radius="full"
                     paddingX="12"
                     paddingRight="0"
@@ -255,7 +255,7 @@ export default function About() {
                         minHeight: "unset",
                         //marginLeft: "auto" 
 
-                        border: '1px solid var(--brand-alpha-strong)',
+                        border: '1px solid var(--neutral-strong)',
                         
                       }}
                       

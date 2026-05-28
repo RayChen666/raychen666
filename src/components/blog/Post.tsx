@@ -14,13 +14,14 @@ interface PostProps {
 export default function Post({ post, thumbnail, direction, thumbnailWidth}: PostProps) {
   return (
     <Card
+      className="post-card"
       fillWidth
       key={post.slug}
       href={`/blog/${post.slug}`}
       transition="micro-medium"
       direction={direction}
       border="neutral-alpha-weak"
-      background="brand-alpha-weak"
+      background="neutral-alpha-weak"
       padding="4"
       radius="l-4"
       gap={direction === "column" ? undefined : "24"}
