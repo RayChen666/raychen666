@@ -9,6 +9,7 @@ export {
   work,
   gallery,
   playground,
+  learning,
 } from "./content";
 
 export {

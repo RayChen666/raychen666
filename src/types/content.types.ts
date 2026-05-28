@@ -243,3 +243,8 @@ export interface Gallery extends BasePageConfig {
  * Playground page configuration.
  */
 export interface Playground extends BasePageConfig {}
+
+/**
+ * Learning page configuration.
+ */
+export interface Learning extends BasePageConfig {}

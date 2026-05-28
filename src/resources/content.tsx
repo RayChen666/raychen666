@@ -1,4 +1,4 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work, Playground, } from "@/types";
+import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work, Playground, Learning} from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
 const person: Person = {
@@ -509,4 +509,11 @@ const playground: Playground = {
   title: "Playground",
   description: `Experiments and interactive demos by ${person.name}`,
 };
-export { person, social, newsletter, home, about, blog, work, gallery, playground };
+
+const learning: Learning = {
+  path: "/learning",
+  label: "Learning",
+  title: "Learning",
+  description: `Recent articles and knowledge learnt by ${person.name}`,
+};
+export { person, social, newsletter, home, about, blog, work, gallery, playground, learning };

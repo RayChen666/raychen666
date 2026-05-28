@@ -42,6 +42,9 @@ import {
   PiMoonDuotone,
   PiSunDuotone,
   PiGameControllerDuotone,
+  PiAcornDuotone,
+  PiPencilCircleDuotone,
+  PiPencilDuotone,
 } from "react-icons/pi";
 
 import { 
@@ -61,7 +64,10 @@ import {
   FcNightLandscape,
   FcLandscape,
   FcPuzzle,
+  FcPicture,
   FcStackOfPhotos,
+  FcReading,
+  FcDocument,
  } from "react-icons/fc";
 
 import {
@@ -172,7 +178,7 @@ export const iconLibrary: Record<string, IconType> = {
   face: PiSmileyMehDuotone,
   face2: FcManager,
   grid2: FcOrgUnit,
-  book2: FcBookmark,
+  book2: FcDocument,
   home2: FcHome,
   dark2: FcNightLandscape,
   dark1: PiMoonDuotone,
@@ -180,7 +186,10 @@ export const iconLibrary: Record<string, IconType> = {
   light1: PiSunDuotone,
   playground: PiGameControllerDuotone,
   playground2: FcPuzzle,
-  gallery2: FcStackOfPhotos,
+  gallery2: FcCloseUpMode,
+  learning: PiAcornDuotone,
+  learning2: FcReading,
+  pencil: PiPencilDuotone,
 };
 
 export type IconLibrary = typeof iconLibrary;

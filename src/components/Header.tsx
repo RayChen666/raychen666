@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { ShineBorder } from "@/components/ShineBorder";
 import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery, playground } from "@/resources";
+import { routes, display, person, about, blog, work, gallery, playground, learning } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
@@ -167,7 +167,7 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
-                      prefixIcon="book"
+                      prefixIcon="pencil"
                       href="/blog"
                       selected={pathname.startsWith("/blog")}
                     />
@@ -189,6 +189,25 @@ export const Header = () => {
                       prefixIcon="gallery"
                       href="/gallery"
                       selected={pathname.startsWith("/gallery")}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/learning"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="learning2"
+                      href="/learning"
+                      label={learning.label}
+                      selected={pathname.startsWith("/learning")}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="learning"
+                      href="/learning"
+                      selected={pathname.startsWith("/learning")}
                     />
                   </Row>
                 </>
@@ -304,7 +323,7 @@ export const Header = () => {
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
-                      prefixIcon="book"
+                      prefixIcon="pencil"
                       href="/blog"
                       selected={pathname.startsWith("/blog")}
                     />
@@ -326,6 +345,25 @@ export const Header = () => {
                       prefixIcon="gallery"
                       href="/gallery"
                       selected={pathname.startsWith("/gallery")}
+                    />
+                  </Row>
+                </>
+              )}
+              {routes["/learning"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="learning2"
+                      href="/learning"
+                      label={learning.label}
+                      selected={pathname.startsWith("/learning")}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="learning"
+                      href="/learning"
+                      selected={pathname.startsWith("/learning")}
                     />
                   </Row>
                 </>
