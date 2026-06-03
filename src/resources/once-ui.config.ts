@@ -23,7 +23,7 @@ const routes: RoutesConfig = {
   "/blog": true,
   "/gallery": false,
   "/playground": false,
-  "/learning": false,
+  "/learning": true,
 };
 
 const display: DisplayConfig = {
