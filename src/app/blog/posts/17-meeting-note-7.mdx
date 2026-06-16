@@ -1,0 +1,223 @@
+---
+title: "Meeting Note (06/12/26)"
+subtitle: "The project development note for 06/12/26 research meeting"
+image: "/images/blog/17-meeting-note-7/cover-image.jpg"
+publishedAt: "2026-06-16"
+tag: "Research Meeting"
+---
+
+**This blog post combines both Saurabh and Ray's meeeting note**
+
+## Highlight
+
+- Get back to work following the schedule.
+
+- Keep time with Saurabh on **Friday 1:30PM** for weekly meeting to sync progress.
+
+- Discussion on topics remining in the current system.
+
+## Topics
+
+**Y-Offset on some of the assets**
+
+From testing Ray discovered some bugs remining in the system for which the asset will have 
+y-offset issue when performing the certain command (POS/ROTAT). Current assets with this issue 
+including `piano.gltf` and `hockney_table.gltf`.
+
+From discovery in `metadata.json` We suspect that the center of the `gltf` item is not in the miidle 
+point instead a roughtly 0.3 y-offset (probably `{x: 0, y: -.3, z: 0}`, while center supposed to 
+be `{x: 0, y: 0, z: 0}`).
+
+To reproduce the issue, 
+
+- first user say: add a piano, and place it in the middle of the room, the system responds with correct processing.
+
+- then when user say: move this piano to the back wall of the room, then the system malfunctioning with a y-offset -.3 applied 
+to the item when moving it.
+
+**System Conversational Memory**
+
+A feature need to refine is the conversational memory. For which the conversational memory module need to be able to remember the 
+context between user and the system. To keep it compact while still demonstrating the feature. We ensure that the language agent have the access to 
+a memory pole which stores user's latest 5 commands and keetp rolling.
+
+**The conversational memory should be accessed at the Language Agent stage!** Ken's framing is that the system should decompose commands **the way a 
+human listener would**. A human listener resolves ambiguous references using conversational context before deciding what action to take — not after.
+
+Consider: 
+
+- Turn 1: "add a desk near the back wall"
+
+- Turn 2: "now rotate it 90 degrees"
+
+"it" is a deictic reference to the desk from Turn 1. This needs to be resolved at **language parsing time** — the Language Agent needs to know 
+"it = desk_01" before it can classify the command as `POS/ROTATE` and identify the involved object. If the memory is only accessed at SceneAgent, 
+the Language Agent outputs `involved_objects: ["it"]` which breaks the whole downstream pipeline.
+
+Design:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+Voice input
+    ↓
+Language Agent reads rolling 5-command memory
+    → resolves pronouns ("it", "that", "them")
+    → resolves implicit references ("move it back" → what is "it"?)
+    → resolves ellipsis ("rotate 90 degrees" → rotate what?)
+    ↓
+Fully resolved parsed_command with concrete object references
+    ↓
+SceneAgent / AssetAgent (no ambiguity left to resolve)
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+One thing to note, this only happens in `POS/ROTATE` branch, since in `ADD/DELETE` branch it already have clear reference which is the newly 
+added item. For example: "add a table, and place it in the middle of the room", we do not need to resolve thsi with conversational memory.
+
+## Embodiment Tracking Design
+
+**A design discussion on conversational memory, gaze tracking, and how humans actually communicate in space**
+
+### The Problem With "It"
+
+Natural language is full of references that only make sense in context. When a user says "rotate it 90 degrees", the word "it" carries no 
+geometric information — it's entirely dependent on what came before. When a user says "move it to the wall" while physically turning their 
+head toward a specific table, "it" means something completely different.
+
+This distinction turned out to be the crux of a design question: **when should the system use conversational memory, and when should it 
+use gaze tracking?**
+
+### 3 Scenarios, Different LEVELS of Resolvers
+
+Consider a room with six tables. The user has been adding furniture through voice commands, most recently adding `table_06`. Then:
+
+- **Scenario A:** User says "rotate it 90 degrees" — Here "it" almost certainly refers to the most 
+recently touched object. Conversational memory is the right resolver — look back at the last turn, find table_06, apply the rotation.
+
+- **Scenario B:** User walks across the room, turns their controller toward a place, and says "move this table there". the system should be able to 
+track the user's position, and find the closest euler position `sqrt(x^2 + z^2)` item named after table and tracks the user's controller's pointing position. 
+
+- **Scenario C:** User looks at a cup, and say, "place the cup on that table", the system should be tracking the cup closest to user's position and for "that table", 
+system tracks user's pointer and calculates the find the item named table closest to pointer using euler position `sqrt(x^2 + z^2)`.
+
+**Scenario A — Pure memory**
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+"rotate it 90 degrees"
+    "it" → memory pool → last touched object → table_06
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+No spatial tracking needed at all.
+
+**Scenario B — User position + controller ray**
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+"move this table there"
+    "this table" → nearest table to user position → sqrt(x² + z²)
+    "there"      → controller ray → world position
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+**Scenario C — User position + controller ray for named object**
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+"place the cup on that table"
+    "the cup"    → nearest cup to user position → sqrt(x² + z²)
+    "that table" → nearest table to controller ray → sqrt(x² + z²)
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+**The unified rule**
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/17-meeting-note-7/embodiment_demonstration.png" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+pronoun "it"              → memory
+"this" + object name      → nearest to USER POSITION
+"that" + object name      → nearest to CONTROLLER RAY
+location "there", "here"  → controller ray world position
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+## Task List
+
+**Until next meeting**
+
+- Saurabh will work on the model/scene Scale up, and other small 
+improvements. He will also look into the Embodied Vision Part, such 
+as whether we can send in the Gaze information. He will also merge the 
+GitHub Branches, and make a new one. Make sure to merge with no conflicts and errors.
+
+- Ray will work on the Conversation Manager and work on the Piano offset problem. 
+He might have to find a new model (GLB) with the correct offset, or maybe some other 
+trick. He can also research into the collision resolution, either a new agent or some 
+math-based solution.
+
+<style>
+{`
+  @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+  .handwritten {
+    font-family: 'Zeyada', cursive !important;
+    font-size: 2.0em;
+    text-align: center;
+  }
+`}
+</style>
+ 
+<p className="handwritten">END</p>
