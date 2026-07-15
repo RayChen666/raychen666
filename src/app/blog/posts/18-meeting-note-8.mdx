@@ -1,0 +1,219 @@
+---
+title: "Meeting Note (07/10/26)"
+subtitle: "The project development note for 07/10/26 research meeting"
+image: "/images/blog/18-meeting-note-8/cover-image.jpg"
+publishedAt: "2026-07-14"
+tag: "Research Meeting"
+---
+
+**This blog post combines both Saurabh and Ray's meeeting note**
+
+## Topics include
+
+- Go over Saurabh's work on interactive feature part.
+
+- Ray talks about the issues encountered after merging branches.
+
+- Discussion on the HCI and User study feasibility feature design.
+
+- Initiate the IEEE VR Overleaf template.
+
+## Branch Update
+
+From branch `Embodied_XR_Immersive`, Saurabh scaled up all the environment assets in to 3x to mimic the real-world scale, 
+and Ray added the conversational memory feature into the system, added 2 `tools.py` under tools folder for the sceneAgent to 
+deal with the commands including "facing" and "around" words, which were packed into branch `scene_edge_case_around_and_facing_placement`. 
+
+After testing, Ray updated the `main` branch with the content of the branch `scene_edge_case_around_and_facing_placement`, and merged all features 
+of 2 lastest branches (Saurabh's `Embodied_XR_Immersive` and Ray's `scene_edge_case_around_and_facing_placement`) into `Embodied_XR_Immersive_v2` 
+which contains all lastest features.
+
+## Issues encountered 
+
+After merging into `Embodied_XR_Immersive_v2`, Ray tested with the commands with vague/complex reasoning route (e.g., "can you create a kitchen?"). 
+Due to the 3x scale-up, the scaneGraph parsing within the **imageAgent + memory node data pipeline** isn't always outputing the correct layout of the spatial placement, 
+which implies the need for adjutment in the sceneAgent prompt or adding a specific `tool.py` for example like the `sceneGraphParser.py`.
+
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+import math
+from typing import Dict, List, Optional
+
+# back_wall/front_wall constrain Z, left_wall/right_wall constrain X — matches
+# the orientation convention ImageAgent is instructed to use when extracting
+# the graph (back=north=-Z, front=south=+Z, left=west=-X, right=east=+X).
+WALL_AXIS = {
+    'back_wall':  ('z', 'min'),
+    'front_wall': ('z', 'max'),
+    'left_wall':  ('x', 'min'),
+    'right_wall': ('x', 'max'),
+}
+CORNER_AXES = {
+    'back_left':   {'x': 'min', 'z': 'min'},
+    'back_right':  {'x': 'max', 'z': 'min'},
+    'front_left':  {'x': 'min', 'z': 'max'},
+    'front_right': {'x': 'max', 'z': 'max'},
+}
+SIDE_AXIS = {'north': 'z', 'south': 'z', 'west': 'x', 'east': 'x'}
+
+WALL_ROTATION = {
+    'back_wall':  0.0,
+    'front_wall': math.pi,
+    'left_wall':  math.pi / 2,
+    'right_wall': -math.pi / 2,
+}
+# Corner placements face diagonally into the room — the bisector of the two
+# walls that form the corner.
+CORNER_ROTATION = {
+    'back_left':   math.pi / 4,
+    'back_right':  -math.pi / 4,
+    'front_left':  3 * math.pi / 4,
+    'front_right': -3 * math.pi / 4,
+}
+
+# 'facing' rotation, keyed by the edge's "side" (where the SOURCE physically
+# IS relative to the target) — e.g. side="south" means the source sits south
+# of the target, so it must turn to face north (pi) to look at it. This is
+# read directly off the relation, not computed from either object's actual
+# resolved coordinates — the graph already says which way it should face,
+# and that shouldn't change just because the mover ended up slightly off-axis
+# from the target after room-bounds/collision adjustments.
+FACE_ROTATION = {
+    'north': 0.0,
+    'south': math.pi,
+    'west':  math.pi / 2,
+    'east':  -math.pi / 2,
+}
+
+
+def layout_graph_positions(nodes_to_place: List[Dict],
+                            edges: List[Dict],
+                            anchor_object: Optional[str],
+                            room_bounds: Dict,
+                            gap: float = 0.15) -> Optional[Dict[str, Dict]]:
+
+`
+,
+        language: "Python",
+        label: "Python",
+      }
+    ]}
+/>
+
+**This is a critical issue that need to be fixed in the next iteration, as it directly affects the user experience.**
+(currently it has 3 layouts include: bedroom, kitchen, and office.jpg, which enough for the basic user study setup, but 
+we wish to have at least 5 typical room layouts that the complex route can correctly reasoning out the spatial coordinates of the assets.)
+
+## Immersive Experience
+
+Saurabh added features where the user can officially interact with the scene. Using Trigger buttons to execute various modes such 
+as “Listen” (RT0), “Execute” (RT1), “Clear” (LT0), and “Help” (LT1).
+
+Saurabh added some features in the Immersive VR mode, which helps create a more welcoming environment for the user, as below:
+
+- Added a feature, where instead of headlocked UI Panels that invade the user’s space, they are now locked onto the left and right wrists. 
+Example: pressing the Right Trigger-1 (T0), will enter into the “Listen Mode”. When that happens, the user may glance at their wrists to trigger the UI Panels
+
+- Glancing away from the wrists will make the UI Panels disappear gracefully, giving the user a choice to check out info any time they want.
+
+- The Help Screen is a small friendly UI Panel on the left Wrist. All the info about “Listen”, “Execute”, and “Clear” still exists in the UI Panel on the right wrists
+
+Saurabh also added a “Haptic” Feedback, where the controller vibrates in accordance with what the user is pressing at the time. Example, long pressing RT1, is 
+“Execute” mode. Then Haptic feedback will pulse thrice: low at trigger time, medium at 50% and high pulse at 100%, giving a sense of constant feedback without having 
+to glance at the wrists.
+
+## Potential Improvement
+
+**Saurabh proposed a helper feature: A controller system where the user maybe able to “walk” inside the immersive VR mode, without having to physically walk inside 
+the real world.**
+
+- Saurabh believes that the user must have full control over the scene. That includes locomotion, rotation, and must assume that the user is unable to do so in real 
+life. This maximizes empathy for the User Study Volunteers, ensuring a smooth, comfortable, and unbiased experience.
+
+- For that, we can use simple Joystick based locomotion. Instead of VR Fatigue and Nausea inducing fast paced control systems, we can have a simple “snap” mechanism, 
+which can help the user slowly locate themselves without physically walking over to the place.
+
+This requires a third person to give some comments on this part of the feature design, as there is no gurantteed answer to this proposal.
+
+## Task:
+
+For this week:
+
+**Saurabh:**
+
+- add the lastest interactive feature into the existing branch and create the new branch `Embodied_XR_Immersive_v3`
+
+- Test with the commands to track bugs of the current system, or if there is a time, come up with an expected case note for users to try the system. 
+(we do not require this note to be precise as a complete user study, just imagine what kind of words and command types will user be guided to speak when conducting actual user study.)
+
+**Ray:**
+
+- Keep working on the tool calling part of the layoutGraph parsing.
+
+- Try the VR Gmaes in the Meta sotre Saurabh recommends.
+
+- Start working on the Overleaf LaTex project for the Introduction part of the final paper.
+
+- Fix the Geometric Collision check for the final iteraction, as for some cases, when the validation agent provides the colliding pairs and reason, it didn't help scene agent to improve its reasoning. 
+For example:
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+Iteration 1: 
+Validation Agent: {
+    Colliding pairs: table, chair; 
+    gap: [0.1, 0.32, 0.25]; 
+    reason: placement too close btw these 2 asssets
+    }
+Scene Agent: {
+    Updated placement: 
+    table: [0.1, 0.1, 0.2]; 
+    chair: [0.2, 0.3, -0.1]
+    }
+
+Iteration 2:
+Validation Agent: {
+    Colliding pairs: table, chair; 
+    gap: [0.1, 0.32, 0.25]; 
+    reason: placement too close btw these 2 asssets
+    }
+Scene Agent: {
+    Updated placement: 
+    table: [0.1, 0.1, 0.2]; 
+    chair: [0.2, 0.3, -0.1]
+    }
+
+Iteration 3:
+...
+`
+,
+        language: "txt",
+      }
+    ]}
+/>
+
+This actually causes a dead reasoning loop.
+
+<style>
+{`
+  @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+  .handwritten {
+    font-family: 'Zeyada', cursive !important;
+    font-size: 2.0em;
+    text-align: center;
+  }
+`}
+</style>
+ 
+<p className="handwritten">END</p>
