@@ -1,0 +1,117 @@
+---
+title: "Meeting Note (07/31/26)"
+subtitle: "The project development note for 07/31/26 research meeting"
+image: "/images/blog/19-meeting-note-9/cover-image.jpg"
+publishedAt: "2026-08-07"
+tag: "Research Meeting"
+---
+
+## Links
+
+- Original [research proposal](/documents/proposal/MAS-XR_research_proposal.pdf), which helps to determine the research scope of the final article.
+
+- Final article script link: [LaTex](https://www.overleaf.com/project/6a5139aa7fd06031600d1e69).
+
+## Topics Covered
+
+- Discussion on the user interface design.
+
+- LaTex creation and update.
+
+- System development for the user-awareness scene understanding.
+
+- Comparative system & user study design.
+
+## User Interface
+
+For better use of the functionality of the system (user-friendly), we decide to add the zoom-in-out feature with the 
+help of controller inspired by the VR games. Saurabh merged the latest branch `Embodied_XR_Immersive_v2` with this feature 
+added, tested on his local end and created new branch `Embodied_XR_Immersive_v3` with all the lastest features.
+
+Ray is going to test it on his local end, including both the laptop and headset for the features added.
+
+## Final Article Draft
+
+Due to the closing-up deadline of the IEEE VR (08/24/26 for the Abstract), me and Saurabh both agree the article cannot be done 
+within this given deadline. Instead, we decide to focus on another conference - [IEEE AIxVR](https://aivr.science.uu.nl/), which 
+has deadline on 09/17/26. This gives us enough time for completing both article and user study.
+
+<figure style={{ maxWidth: '768px', margin: '1.5rem auto' }}>
+   <img src="/images/blog/19-meeting-note-9/IEEE_AIxVR.jpg" 
+    alt="Control panel layout" 
+    width="100%"
+    style={{ borderRadius: '20px' }}
+  />
+</figure>
+
+For the LaTex script and templete, since we are focusing on another conference, the templete of IEEE VR is totally obsolete. The IEEE AIxVR 
+uses the default IEEE templete, which I've already switched to the default templete for the lastest draft in LaTex project. 
+
+So far for the article draft, I've already completed the introduction part. The remaining part which could be done in this week includes **Related Articles** 
+and **Methods** sections. We leave the composition of **Experiement**, **Results**, **Discussion** section until the user study has been done.
+
+<span style={{ color: 'red' }}>Both Saurabh and Ray are commiting to the composition of the draft</span>
+
+## System development & bug fix
+
+So far the most important module, `sceneAgent`'s user awareness section is set to `[0,0,0]` by deafult.
+
+<CodeBlock
+    marginBottom="16"
+    style={{ borderRadius: '20px' }}
+    codes={[
+      {
+        code:
+        `
+# Default user position if not provided
+if user_position is None:
+    user_position = {
+        'x': 0, 'y': 0, 'z': 0,
+        'rotation': {'x': 0, 'y': 0, 'z': 0}
+    }`
+,
+        language: "Python",
+        label: "Python",
+      }
+    ]}
+/>
+
+This need to be adjusted from End-to-End to allow for the sceneAgent dynamically process the spatial command based on user's current position.
+
+The `complex route` of the system is fully developed. Currently it has 3 layout templete for basic user study cases. One bug need to be fixed is that 
+for some of the item generation part of the furniture is out off the room bounds. This needs to be fixed.
+
+## User Study Design
+
+Our currrent idea for the Comparative system is to include all of the features within one large LLM call so we bring the current prompt into single LLM agent 
+to see how it compares with the effect of the multi-agent structure. The user study measuring matrics is designed based on this comparison (for ideas behind 
+check out the [LaTex](https://www.overleaf.com/project/6a5139aa7fd06031600d1e69) docuemnt - Introduction section).
+
+This part of the design requires further discussion.
+
+## Work Style Adjustment
+
+On last meeting Saurabh mentioned that he is going to California for the next 1-2 monthes, so that he is returning the meta quest 3s lent from the lab. We need 
+to have a time in person to meet so that Saurabh gives back the device to me.
+
+I'm also going to move to Bay Area between late August and early September, as I passed the 4th interview of the Physical AI company and currently negotialting for 
+the total package for the job.
+
+In this case both of us won't be staying at Future Reality Lab for the final period of the article composition, so the completion of user study need to be hurried. Otherwise we need to continue to do 
+the in-person user study at California. That is another thing worth consideration.
+
+
+
+
+<style>
+{`
+  @import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+  .handwritten {
+    font-family: 'Zeyada', cursive !important;
+    font-size: 2.0em;
+    text-align: center;
+  }
+`}
+</style>
+ 
+<p className="handwritten">END</p>
